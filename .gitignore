@@ -1,0 +1,9 @@
+# IDE
+.idea/
+
+# Librairies
+node_modules/
+
+# Application
+/public/app.js
+.env
