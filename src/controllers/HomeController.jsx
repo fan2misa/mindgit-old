@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+
 import {withStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/es/Typography/Typography";
 
@@ -8,15 +9,27 @@ const drawerWidth = 240;
 const styles = theme => ({
     root: {
         display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'stretch',
+        height: '100%'
     },
-    drawer: {
-        width: drawerWidth,
+    left: {
+        height: 'auto',
+        minWidth: 375,
+        backgroundColor: theme.palette.primary.dark,
+        borderRight: '1px solid ' + theme.palette.primary.border.dark
     },
-    drawerPaper: {
-        width: drawerWidth,
+    center: {
+        height: 'auto',
+        width: '100%',
+        minWidth: 500,
+        backgroundColor: theme.palette.primary.main
     },
-    content: {
-        padding: theme.spacing.unit,
+    right: {
+        height: 'auto',
+        minWidth: 375,
+        backgroundColor: theme.palette.primary.dark,
+        borderLeft: '1px solid ' + theme.palette.primary.border.dark
     },
 });
 
@@ -26,11 +39,19 @@ class HomeController extends React.Component {
     }
 
     render() {
-        return <div className={this.props.classes.root}>
-            <main className={this.props.classes.content}>
-                <Typography component="h2" variant="h1" gutterBottom>HomeController</Typography>
+        return (
+            <main className={this.props.classes.root}>
+                <div className={this.props.classes.left}>
+
+                </div>
+                <div className={this.props.classes.center}>
+
+                </div>
+                <div className={this.props.classes.right}>
+
+                </div>
             </main>
-        </div>;
+        );
     }
 }
 
