@@ -48,6 +48,6 @@ class Navbar extends React.Component {
 
 Navbar.propTypes = {
     currentBranch: PropTypes.string.isRequired,
-}
+};
 
 export default withStyles(styles, { withTheme: true })(Navbar);
