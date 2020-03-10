@@ -4,6 +4,7 @@ const Dotenv = require('dotenv-webpack');
 
 let config = {
     entry: "./src/main.jsx",
+    target: 'web',
     output: {
         path: __dirname + "/public",
         filename: "app.js",
