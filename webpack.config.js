@@ -38,4 +38,17 @@ let config = {
     }
 };
 
-module.exports = config;
+let web = Object.assign({}, config, {
+    name: 'web',
+    node: {
+        fs: 'empty',
+        child_process: 'empty',
+    }
+});
+
+let electron = Object.assign({}, config, {
+    name: 'electron',
+    target: 'electron-main'
+});
+
+module.exports = [web, electron];

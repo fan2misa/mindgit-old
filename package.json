@@ -4,9 +4,10 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "web": "cross-env NODE_ENV=development cross-env PLATFORM=web webpack-dev-server --hot",
+    "web": "cross-env NODE_ENV=development cross-env PLATFORM=web webpack-dev-server --config-name=web --hot",
     "node": "node back/main.js",
-    "build": "cross-env NODE_ENV=production cross-env PLATFORM=web webpack"
+    "electron": "npm run build && ./node_modules/electron/cli.js electron/main.js",
+    "build": "cross-env NODE_ENV=production cross-env PLATFORM=electron webpack --config-name=electron"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +40,7 @@
     "babel-loader": "^8.0.5",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
+    "electron": "^8.1.1",
     "file-loader": "^3.0.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",

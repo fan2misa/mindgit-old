@@ -10,13 +10,11 @@ http.listen(3000, function () {
 
 io.on('connection', function (socket) {
 
-    socket.on('open repository', function(directory) {
-        git(directory)
+    socket.on('open repository', function(data) {
+        git(data.directory)
     });
 
-    socket.on('stage', function(directory, files) {
-        if (null !== repository) {
-            git(directory).add(files);
-        }
+    socket.on('stage', function(data) {
+        git(data.directory).add(data.files);
     });
 });

@@ -1,20 +1,38 @@
 
 import io from 'socket.io-client';
-
-const socket = io('http://localhost:3000');
+import git from 'simple-git';
 
 class Service {
 
     constructor() {
-
+        if (process.env.PLATFORM === 'web') {
+            this.socket = io(process.env.SOCKET_URL);
+        }
     }
 
     open(directory) {
-        socket.emit('open repository', directory);
+        if (process.env.PLATFORM === 'web') {
+            this.socket.emit('open repository', {
+                directory: directory
+            });
+        } else {
+            git(directory);
+        }
     }
 
-    stage(files) {
-        socket.emit('stage', files);
+    stage(directory, files) {
+        if (process.env.PLATFORM === 'web') {
+            console.log({
+                directory: directory,
+                files: files
+            });
+            this.socket.emit('stage', {
+                directory: directory,
+                files: files
+            });
+        } else {
+            git(directory).add(files);
+        }
     }
 }
 
