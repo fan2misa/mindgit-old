@@ -2,9 +2,6 @@ import React from "react";
 import {connect} from "react-redux";
 
 import {withStyles} from '@material-ui/core/styles';
-import Typography from "@material-ui/core/es/Typography/Typography";
-
-const drawerWidth = 240;
 
 const styles = theme => ({
     root: {

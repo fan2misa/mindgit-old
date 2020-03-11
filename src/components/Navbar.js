@@ -17,11 +17,14 @@ const styles = theme => ({});
 
 class Navbar extends React.Component {
     render() {
+        console.log(this.props);
         return (
             <AppBar position="sticky">
                 <Toolbar>
                     <Button component={Link} to="/" color="inherit">Home</Button>
                     <Button component={Link} to="/about" color="inherit">About</Button>
+                    <Button color="inherit" onClick={() => this.props.openRepository()}>Open Repository</Button>
+                    <Button color="inherit" onClick={() => this.props.stageAll()}>Stage </Button>
 
                     <Tooltip title="Fetch">
                         <IconButton color="inherit">
@@ -48,6 +51,8 @@ class Navbar extends React.Component {
 
 Navbar.propTypes = {
     currentBranch: PropTypes.string.isRequired,
+    openRepository: PropTypes.func.isRequired,
+    stageAll: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(Navbar);
