@@ -1,10 +1,7 @@
 'use strict';
 
 let { app, BrowserWindow } = require('electron');
-let path = require('path');
-let formatUrl = require('url');
 
-// global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow;
 
 function createMainWindow()
@@ -18,14 +15,10 @@ function createMainWindow()
     });
 
     if (process.env.NODE_ENV === 'production') {
-        window.loadURL(formatUrl({
-            pathname: path.join(__dirname, 'index.html'),
-            protocol: 'file',
-            slashes: true
-        }));
+        window.loadURL(`file://${__dirname}/public/index.html`);
     } else {
         window.webContents.openDevTools();
-        window.loadURL(`file://${__dirname}/../public/index.html`);
+        window.loadURL(`http://localhost:9000`);
     }
 
     window.on('closed', () => {

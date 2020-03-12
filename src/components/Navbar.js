@@ -17,7 +17,7 @@ const styles = theme => ({});
 
 class Navbar extends React.Component {
     render() {
-        console.log(this.props);
+        console.log('Navbar', this.props);
         return (
             <AppBar position="sticky">
                 <Toolbar>

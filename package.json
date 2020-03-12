@@ -4,10 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "web": "cross-env NODE_ENV=development cross-env PLATFORM=web webpack-dev-server --config-name=web --hot",
-    "node": "node back/main.js",
-    "electron": "npm run build && ./node_modules/electron/cli.js electron/main.js",
-    "build": "cross-env NODE_ENV=production cross-env PLATFORM=electron webpack --config-name=electron"
+    "web": "cross-env NODE_ENV=development cross-env webpack-dev-server --config-name=web --hot",
+    "electron": "electron electron-app.js",
+    "build": "cross-env NODE_ENV=production cross-env webpack --config-name=electron"
   },
   "author": "",
   "license": "ISC",
@@ -29,8 +28,6 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "simple-git": "^1.131.0",
-    "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.0",
     "typeface-roboto": "0.0.54"
   },
   "devDependencies": {
