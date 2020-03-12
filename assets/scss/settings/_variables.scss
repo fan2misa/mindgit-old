@@ -1,0 +1,16 @@
+$color-primary: #343A40;
+$color-secondary: #FF6347;
+
+$theme-colors: map-merge($theme-colors, (
+        "primary": $color-primary,
+        "secondary": $color-secondary
+));
+
+$topbar-border-color: darken($color-primary, 5%);
+
+$dashboard-bg-color: lighten($color-primary, 5%);
+$dashboard-sidebar-bg-color: $color-primary;
+$dashboard-sidebar-border-color: darken($dashboard-sidebar-bg-color, 5%);
+
+$footer-bg-color: $color-primary;
+$footer-border-color:darken($footer-bg-color, 5%);

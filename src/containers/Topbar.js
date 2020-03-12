@@ -9,13 +9,13 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentBranch: 'MindGit / master'
   }
-}
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
       openRepository: () => dispatch(openRepositoryAction(null)),
       stageAll: () => dispatch(stageAction('*')),
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

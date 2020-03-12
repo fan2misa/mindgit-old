@@ -1,7 +1,6 @@
+
 import React from "react";
-import Typography from "@material-ui/core/Typography/Typography";
 import connect from "react-redux/es/connect/connect";
-import {withStyles} from "@material-ui/core";
 
 const drawerWidth = 240;
 
@@ -22,9 +21,9 @@ const styles = theme => ({
 
 class AboutController extends React.Component {
     render() {
-        return <div className={this.props.classes.root}>
-            <main className={this.props.classes.content}>
-                <Typography component="h2" variant="h1" gutterBottom>AboutController</Typography>
+        return <div className="root">
+            <main className="content">
+                AboutController
             </main>
         </div>;
     }
@@ -34,7 +33,7 @@ const mapStateToProps = (state) => {
     return {
         app: state.app
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -42,6 +41,6 @@ const mapDispatchToProps = (dispatch) => {
 
         })
     }
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(AboutController));
+export default connect(mapStateToProps, mapDispatchToProps)(AboutController);
