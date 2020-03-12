@@ -4,7 +4,7 @@ const Dotenv = require('dotenv-webpack');
 
 let config = {
     entry: "./src/main.jsx",
-    target: 'web',
+    target: 'electron-main',
     output: {
         path: __dirname + "/public",
         filename: "app.js",
@@ -24,7 +24,6 @@ let config = {
     },
 
     plugins: [
-        new webpack.EnvironmentPlugin(['PLATFORM']),
         new Dotenv({
             path: './.env',
             safe: true,

@@ -12,19 +12,20 @@ const styles = theme => ({
     },
     left: {
         height: 'auto',
-        minWidth: 375,
+        minWidth: 325,
+        maxWidth: 450,
         backgroundColor: theme.palette.primary.dark,
         borderRight: '1px solid ' + theme.palette.primary.border.dark
     },
     center: {
+        flex: 1,
         height: 'auto',
-        width: '100%',
-        minWidth: 500,
         backgroundColor: theme.palette.primary.main
     },
     right: {
         height: 'auto',
-        minWidth: 375,
+        minWidth: 325,
+        maxWidth: 450,
         backgroundColor: theme.palette.primary.dark,
         borderLeft: '1px solid ' + theme.palette.primary.border.dark
     },
