@@ -4,8 +4,10 @@ import GitService from '../../services/GitService';
 
 import {LOCALSTORAGE_DIRECTORY} from '../../constantes/services/LocalStorageConstante';
 
-export const stageAction = () => {
+export const statusAction = () => {
     return (dispatch) => {
-        GitService.stage(LocalStorageService.get(LOCALSTORAGE_DIRECTORY), '*');
+        if (GitService.isRepository(LocalStorageService.get(LOCALSTORAGE_DIRECTORY))) {
+            GitService.status(LocalStorageService.get(LOCALSTORAGE_DIRECTORY));
+        }
     }
 };

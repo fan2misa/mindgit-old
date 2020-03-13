@@ -1,6 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 
+import {statusAction} from './../actions/git/status';
+
 class HomeController extends React.Component {
     componentDidMount() {
         this.props.load(this.props.app.user);
@@ -32,8 +34,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         load: (user) => dispatch(function (user) {
-
-        })
+            dispatch(statusAction())
+        }),
     }
 };
 

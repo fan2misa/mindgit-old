@@ -4,18 +4,21 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "web": "cross-env NODE_ENV=development cross-env webpack-dev-server --config-name=electron --hot",
+    "web": "cross-env NODE_ENV=development cross-env webpack-dev-server --config-name=electron --mode development --hot --inline",
     "electron": "electron electron-app.js",
-    "build": "cross-env NODE_ENV=production cross-env webpack --config-name=electron"
+    "build": "cross-env NODE_ENV=production cross-env webpack --config-name=electron --mode production"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "dotenv-webpack": "^1.7.0",
+    "electron-reload": "^1.5.0",
     "history": "^4.9.0",
     "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.4.1",
     "lodash": "^4.17.11",
+    "popper.js": "^1.16.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
