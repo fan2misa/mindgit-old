@@ -9,7 +9,6 @@ import {openRepositoryAction} from "../actions/git/openRepository";
 
 class RepositoriesModal extends React.Component {
     render() {
-        console.log(this.props);
         return (
             <Modal type="modal-full" title={this.props.title}>
                 <ModalBody>

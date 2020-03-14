@@ -34,7 +34,7 @@ export const openRepositoryAction = () => {
 
                 dispatch({
                     type: SET_CURRENT_DIRECTORY,
-                    payload: directory
+                    data: directory
                 });
 
                 dispatch(closeRepositoryModalAction());
