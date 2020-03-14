@@ -12,8 +12,11 @@ class Service {
     }
 
     status(directory) {
-        git(directory).status((err, status) => {
-            console.log(err, status);
+        return new Promise(function(resolve, reject) {
+            git(directory).status((err, status) => {
+                if (err) reject(err);
+                resolve(status);
+            });
         });
     }
 
@@ -22,7 +25,12 @@ class Service {
     }
 
     stage(directory, files) {
-        git(directory).add(files);
+        return new Promise(function(resolve, reject) {
+            git(directory).add(files, (err, status) => {
+                if (err) reject(err);
+                resolve(status);
+            });
+        });
     }
 }
 

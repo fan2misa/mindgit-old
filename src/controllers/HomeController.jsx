@@ -9,6 +9,7 @@ class HomeController extends React.Component {
     }
 
     render() {
+        console.log(this.props.status);
         return (
             <main id="dashboard">
                 <div className="dashboard-left">
@@ -27,7 +28,8 @@ class HomeController extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        app: state.app
+        app: state.app,
+        status: state.git.status,
     }
 };
 
