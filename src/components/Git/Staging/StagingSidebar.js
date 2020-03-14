@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class StagingSidebar extends React.Component {
     render() {
         return (
-            <div>
+            <div className="staging-sidebar">
                 {this.props.children}
             </div>
         );

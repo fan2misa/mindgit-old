@@ -27,11 +27,11 @@ class StagingBlock extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="text-right">
+            <div className="staging-block">
+                <div className="staging-block-header">
                     <button className={this.getButtonClasseName()} onClick={() => this.props.buttonOnClick()}>{this.props.buttonText}</button>
                 </div>
-                <div>
+                <div className="staging-block-body">
                     <ul className="list-unstyled">
                         {this.props.files.map((file, index) => {
                             return <li key={index}>
