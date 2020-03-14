@@ -34,7 +34,7 @@ class StagingBlock extends React.Component {
                 <div className="staging-block-body">
                     <ul className="list-unstyled">
                         {this.props.files.map((file, index) => {
-                            return <li key={index}>
+                            return <li className="staging-block-file" key={index}>
                                 <div className="media">
                                     <FontAwesomeIcon className="align-self-center mr-1" icon={this.getIcon(file)} />
                                     <div className="media-body">

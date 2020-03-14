@@ -19,6 +19,14 @@
             border: 1px solid $staging-block-body-border-color;
             flex: 1;
             overflow-x: auto;
+
+            .staging-block-file {
+                padding: 0.3rem;
+
+                &:hover {
+                    background-color: $staging-block-file-bg-color-hover;
+                }
+            }
         }
     }
 }

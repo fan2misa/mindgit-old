@@ -15,12 +15,12 @@ class Footer extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        currentBranch: ''
     }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return {}
+    return {
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Footer);
