@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import { connect } from 'react-redux';
 
-import { openRepositoryAction } from './../actions/git/openRepository';
+import { openRepositoryModalAction } from './../actions/git/openRepository';
 import { stageAction } from './../actions/git/stage';
 
 class Navbar extends React.Component {
@@ -12,7 +12,7 @@ class Navbar extends React.Component {
                 <div id="topbarNav" className="navbar-collapse">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <button className="btn nav-link" onClick={() => this.props.openRepository()}>Reposistory</button>
+                            <button className="btn nav-link" onClick={() => this.props.openRepositoryModal()}>Reposistory</button>
                         </li>
                         <li className="nav-item">
                             <button className="btn nav-link" onClick={() => this.props.stageAll()}>Stage</button>
@@ -37,7 +37,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-      openRepository: () => dispatch(openRepositoryAction()),
+      openRepositoryModal: () => dispatch(openRepositoryModalAction()),
       stageAll: () => dispatch(stageAction('*')),
   }
 };

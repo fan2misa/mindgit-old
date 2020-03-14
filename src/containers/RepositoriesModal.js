@@ -5,19 +5,18 @@ import connect from "react-redux/es/connect/connect";
 
 import Modal from '../components/Modal/Modal';
 import ModalBody from '../components/Modal/ModalBody';
-import ModalFooter from '../components/Modal/ModalFooter';
+import {openRepositoryAction} from "../actions/git/openRepository";
 
 class RepositoriesModal extends React.Component {
     render() {
+        console.log(this.props);
         return (
             <Modal type="modal-full" title={this.props.title}>
                 <ModalBody>
-                    <p>test</p>
+                    <button className="btn btn-primary" onClick={() => this.props.openRepository()}>
+                        Open Repository
+                    </button>
                 </ModalBody>
-                <ModalFooter>
-                    <button type="button" className="btn btn-primary">Save changes</button>
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                </ModalFooter>
             </Modal>
         );
     }
@@ -30,7 +29,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return {}
+    return {
+        openRepository: () => dispatch(openRepositoryAction())
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepositoriesModal);
