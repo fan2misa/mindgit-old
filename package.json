@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "web": "cross-env NODE_ENV=development cross-env webpack-dev-server --config-name=electron --mode development --hot --inline",
-    "electron": "electron electron-app.js",
-    "build": "cross-env NODE_ENV=production cross-env webpack --config-name=electron --mode production"
+    "electron": "cross-env NODE_ENV=development electron electron-app.js",
+    "build": "cross-env NODE_ENV=production cross-env webpack --config-name=electron --mode production && "
   },
   "author": "",
   "license": "ISC",

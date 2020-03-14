@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faAdd } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faPlus, faMinus, faPenSquare } from '@fortawesome/free-solid-svg-icons';
 
 
 class StagingBlock extends React.Component {
@@ -12,7 +12,17 @@ class StagingBlock extends React.Component {
     }
 
     getIcon(file) {
-        return file[this.props.fileIconProperty] === 'M' ? faPen : faAdd;
+        switch (file[this.props.fileIconProperty]) {
+            case "A":
+            case "?":
+                return faPlus;
+            case "M":
+                return faPen;
+            case "D":
+                return faMinus;
+            case "R":
+                return faPenSquare;
+        }
     }
 
     render() {

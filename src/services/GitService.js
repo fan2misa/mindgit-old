@@ -38,6 +38,16 @@ class Service {
             });
         });
     }
+
+    unstage(directory, files) {
+        const me = this;
+        return new Promise(function(resolve, reject) {
+            git(directory).reset(files, (err, status) => {
+                if (err) reject(err);
+                resolve(me.status(directory));
+            });
+        });
+    }
 }
 
 export default new Service();

@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
         buttonType: 'btn-success',
         fileIconProperty: 'working_dir',
         files: state.git.status
-            ? state.git.status.files.filter(file => ["A", "M"].includes(file.working_dir) || (file.index === file.working_dir))
+            ? state.git.status.files.filter(file => ["A", "M", "D", "R"].includes(file.working_dir) || (file.index === file.working_dir))
             : []
     }
 };

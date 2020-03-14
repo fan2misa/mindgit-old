@@ -15,3 +15,13 @@ export const stageAction = () => {
             }));
     }
 };
+
+export const unstageAction = () => {
+    return (dispatch) => {
+        GitService.unstage(LocalStorageService.get(LOCALSTORAGE_DIRECTORY), 'mixed')
+            .then(status => dispatch({
+                type: SET_GIT_STATUS,
+                data: status
+            }));
+    }
+};

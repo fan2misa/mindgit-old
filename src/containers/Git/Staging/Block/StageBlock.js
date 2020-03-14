@@ -5,7 +5,7 @@ import connect from "react-redux/es/connect/connect";
 
 import StagingBlock from './../../../../components/Git/Staging/Block/StagingBlock';
 
-import {stageAction} from "../../../../actions/git/stage";
+import {unstageAction} from "../../../../actions/git/stage";
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -13,14 +13,14 @@ const mapStateToProps = (state, ownProps) => {
         buttonType: 'btn-danger',
         fileIconProperty: 'index',
         files: state.git.status
-            ? state.git.status.files.filter(file => ["A", "M"].includes(file.index))
+            ? state.git.status.files.filter(file => ["A", "M", "D", "R"].includes(file.index))
             : []
     }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        buttonOnClick: () => dispatch(stageAction('*')),
+        buttonOnClick: () => dispatch(unstageAction('*')),
     }
 };
 
