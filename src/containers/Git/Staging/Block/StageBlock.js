@@ -9,7 +9,7 @@ import {unstageAction} from "../../../../actions/git/stage";
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        buttonText: 'Unstage',
+        buttonText: 'Unstage all changes',
         buttonType: 'btn-danger',
         fileIconProperty: 'index',
         files: state.git.status

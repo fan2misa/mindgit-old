@@ -9,7 +9,7 @@ import {stageAction} from "../../../../actions/git/stage";
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        buttonText: 'Stage',
+        buttonText: 'Stage all changes',
         buttonType: 'btn-success',
         fileIconProperty: 'working_dir',
         files: state.git.status

@@ -6,6 +6,7 @@ import {statusAction} from './../actions/git/status';
 import StagingSidebar from "../components/Git/Staging/StagingSidebar";
 import StageBlock from "../containers/Git/Staging/Block/StageBlock";
 import UnstageBlock from "../containers/Git/Staging/Block/UnstageBlock";
+import Commiter from "../containers/Git/Commiter";
 
 class HomeController extends React.Component {
     componentDidMount() {
@@ -27,6 +28,7 @@ class HomeController extends React.Component {
                         <UnstageBlock />
                         <StageBlock />
                     </StagingSidebar>
+                    <Commiter/>
                 </div>
             </main>
         );

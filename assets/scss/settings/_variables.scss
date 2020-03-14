@@ -1,5 +1,5 @@
 $color-primary: #343A40;
-$color-secondary: #FF6347;
+$color-secondary: #9b59b6;
 
 $theme-colors: map-merge($theme-colors, (
         "primary": $color-primary,
@@ -8,6 +8,7 @@ $theme-colors: map-merge($theme-colors, (
 
 $topbar-border-color: darken($color-primary, 5%);
 
+// Dashboard
 $dashboard-bg-color: $color-primary;
 $dashboard-sidebar-bg-color: lighten($color-primary, 5%);
 $dashboard-sidebar-border-color: darken($color-primary, 5%);
@@ -15,10 +16,22 @@ $dashboard-sidebar-border-color: darken($color-primary, 5%);
 $footer-bg-color: $color-primary;
 $footer-border-color: darken($footer-bg-color, 5%);
 
+// Form
+$input-focus-border-color: darken($color-primary, 5%);
+$input-focus-box-shadow: 0 0 0 $input-btn-focus-width rgba($color-secondary, .25);
+
+$input-bg: $color-primary;
+$input-border-color: darken($input-bg, 5%);
+
+$input-focus-bg: $input-bg;
+
+// Modal
 $modal-content-bg: $color-primary;
 $modal-content-border-color: darken($modal-content-bg, 5%);
 $modal-header-border-color: $modal-content-border-color;
 $modal-footer-border-color: $modal-content-border-color;
 
+// Staging Block
 $staging-block-body-bg-color: $color-primary;
 $staging-block-body-border-color: darken($staging-block-body-bg-color, 5%);
+$staging-block-file-bg-color-hover: lighten($color-primary, 5%);
