@@ -1,6 +1,8 @@
 
+import $ from 'jquery';
+
 export const openRepositoryAction = () => {
     return (dispatch) => {
-        console.log('openRepositoryAction');
+        $('#test').modal('show');
     }
 };

@@ -13,4 +13,9 @@ $dashboard-sidebar-bg-color: $color-primary;
 $dashboard-sidebar-border-color: darken($dashboard-sidebar-bg-color, 5%);
 
 $footer-bg-color: $color-primary;
-$footer-border-color:darken($footer-bg-color, 5%);
+$footer-border-color: darken($footer-bg-color, 5%);
+
+$modal-content-bg: $color-primary;
+$modal-content-border-color: darken($modal-content-bg, 5%);
+$modal-header-border-color: $modal-content-border-color;
+$modal-footer-border-color: $modal-content-border-color;
