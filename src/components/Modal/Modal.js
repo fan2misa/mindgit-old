@@ -19,8 +19,7 @@ class Modal extends React.Component {
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        {this.props.children[0]}
-                        {this.props.children[1]}
+                        {this.props.children}
                     </div>
                 </div>
             </div>
