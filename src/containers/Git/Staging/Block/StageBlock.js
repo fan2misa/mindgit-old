@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         buttonText: 'Unstage',
         buttonType: 'btn-danger',
+        fileIconProperty: 'index',
         files: state.git.status
             ? state.git.status.files.filter(file => ["A", "M"].includes(file.index))
             : []
