@@ -1,9 +1,10 @@
 import {SET_CURRENT_USER} from '../constantes/actions/appConstantes';
 
 const initialState = {
-    user: {},
-    repository: 'F:\\www\\mindgit',
-    branch: null,
+    branches: {
+        local: [],
+        remote: [],
+    }
 };
 
 const reducer = (state = initialState, payload) => {

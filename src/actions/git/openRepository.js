@@ -1,8 +1,8 @@
 
-import GitService from '../../services/GitService';
+import $ from 'jquery';
 
 export const openRepositoryAction = () => {
     return (dispatch) => {
-        GitService.open('/home/gjean/www/mindgit');
+        $('#test').modal('show');
     }
-}
+};

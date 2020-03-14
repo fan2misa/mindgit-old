@@ -1,0 +1,29 @@
+main#dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+
+  .dashboard-left, .dashboard-right {
+    height: auto;
+    min-width: 325px;
+    max-width: 450px;
+    background-color: $dashboard-sidebar-bg-color;
+    padding: 5px;
+  }
+
+  .dashboard-left {
+    border-right: 1px solid $dashboard-sidebar-border-color;
+  }
+
+  .dashboard-center {
+    flex: 1;
+    height: auto;
+    background-color: $dashboard-bg-color;
+    padding: 5px;
+  }
+
+  .dashboard-right {
+    border-left: 1px solid $dashboard-sidebar-border-color;
+  }
+}

@@ -4,7 +4,6 @@ const Dotenv = require('dotenv-webpack');
 
 let config = {
     entry: "./src/main.jsx",
-    target: 'electron-main',
     output: {
         path: __dirname + "/public",
         filename: "app.js",
@@ -17,7 +16,7 @@ let config = {
     module: {
         rules: [
             { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "babel-loader" },
-            { test:/\.css$/,  use:['style-loader','css-loader'] },
+            { test:/\.s[ac]ss$/i,  use:['style-loader','css-loader', 'sass-loader'] },
             { test: /\.(ttf|eot|woff|woff2)$/, use: { loader: "file-loader", options: { name: "fonts/[name].[ext]", }, },
             }
         ]
@@ -39,6 +38,7 @@ let config = {
 
 let web = Object.assign({}, config, {
     name: 'web',
+    target: 'web',
     node: {
         fs: 'empty',
         child_process: 'empty',
