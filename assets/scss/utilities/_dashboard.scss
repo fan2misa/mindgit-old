@@ -1,3 +1,5 @@
+@import "./dashboard/staging-sidebar";
+
 main#dashboard {
   display: flex;
   justify-content: space-between;
@@ -6,13 +8,15 @@ main#dashboard {
 
   .dashboard-left, .dashboard-right {
     height: auto;
-    min-width: 325px;
-    max-width: 450px;
+    min-width: 400px;
+    max-width: 500px;
     background-color: $dashboard-sidebar-bg-color;
-    padding: 5px;
+    padding: 0.5rem;
   }
 
   .dashboard-left {
+    display: flex;
+    flex-direction: column;
     border-right: 1px solid $dashboard-sidebar-border-color;
   }
 
@@ -20,10 +24,12 @@ main#dashboard {
     flex: 1;
     height: auto;
     background-color: $dashboard-bg-color;
-    padding: 5px;
+    padding: 0.5rem;
   }
 
   .dashboard-right {
+    display: flex;
+    flex-direction: column;
     border-left: 1px solid $dashboard-sidebar-border-color;
   }
 }
