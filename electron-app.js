@@ -30,8 +30,6 @@ function createMainWindow()
         }
     });
 
-    console.log(process.env.NODE_ENV);
-
     if (process.env.NODE_ENV === 'production') {
         window.loadURL(`file://${__dirname}/public/index.html`);
     } else {

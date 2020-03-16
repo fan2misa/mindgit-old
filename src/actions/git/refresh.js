@@ -6,6 +6,7 @@ import {LOCALSTORAGE_DIRECTORY} from '../../constantes/services/LocalStorageCons
 import {statusAction} from "./status";
 import {remoteBranchAction} from "./remoteBranch";
 import {localBranchAction} from "./localBranch";
+import {logAction} from "./log";
 
 export const refreshAction = () => {
     return (dispatch) => {
@@ -13,6 +14,7 @@ export const refreshAction = () => {
             dispatch(statusAction());
             dispatch(localBranchAction());
             dispatch(remoteBranchAction());
+            dispatch(logAction());
         }
     }
 };

@@ -11,13 +11,9 @@ import RemoteBranch from "../containers/Git/Branch/RemoteBranch";
 import StageBlock from "../containers/Git/Staging/Block/StageBlock";
 import UnstageBlock from "../containers/Git/Staging/Block/UnstageBlock";
 import Commiter from "../containers/Git/Commiter";
+import Graph from '../containers/Git/Graph';
 
 class HomeController extends React.Component {
-    componentDidMount() {
-        this.props.load(this.props.app.user);
-        setInterval(() => this.props.refresh(this.props.app.user), 1000);
-    }
-
     render() {
         return (
             <main id="dashboard">
@@ -28,7 +24,7 @@ class HomeController extends React.Component {
                     </div>
                 </div>
                 <div className="dashboard-center">
-
+                    <Graph />
                 </div>
                 <div className="dashboard-right">
                     <StagingSidebar>
@@ -51,8 +47,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        load: (user) => dispatch(user => {dispatch(statusAction())}),
-        refresh: (user) => dispatch((user) => dispatch(refreshAction())),
     }
 };
 

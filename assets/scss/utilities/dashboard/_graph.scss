@@ -1,0 +1,38 @@
+.graph {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    overflow-x: auto;
+
+    .commit-log-list {
+        width: 100%;
+
+        .commit-log {
+
+            .commit-log-refs, .commit-log-author {
+                white-space: nowrap;
+            }
+
+            .commit-log-message {
+                position: relative;
+                width: 100%;
+            }
+
+            .commit-log-message:before {
+                content: '&nbsp;';
+                visibility: hidden;
+            }
+
+            .commit-log-message span {
+                position: absolute;
+                left: 0;
+                right: 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
