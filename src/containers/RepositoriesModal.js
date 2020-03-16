@@ -10,7 +10,7 @@ import {openRepositoryAction} from "../actions/git/openRepository";
 class RepositoriesModal extends React.Component {
     render() {
         return (
-            <Modal type="modal-full" title={this.props.title}>
+            <Modal id={this.props.id} type="modal-full" title={this.props.title}>
                 <ModalBody>
                     <button className="btn btn-primary" onClick={() => this.props.openRepository()}>
                         Open Repository
@@ -23,6 +23,7 @@ class RepositoriesModal extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        id: "repository-management-modal",
         title: 'Repository Management'
     }
 };

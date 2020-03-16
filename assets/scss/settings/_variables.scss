@@ -25,6 +25,11 @@ $input-border-color: darken($input-bg, 5%);
 
 $input-focus-bg: $input-bg;
 
+// Card
+$card-bg: $color-primary;
+$card-spacer-y: 0.5rem;
+$card-spacer-x: 0.5rem;
+
 // Modal
 $modal-content-bg: $color-primary;
 $modal-content-border-color: darken($modal-content-bg, 5%);

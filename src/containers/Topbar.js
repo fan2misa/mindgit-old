@@ -12,7 +12,7 @@ class Navbar extends React.Component {
                 <div id="topbarNav" className="navbar-collapse">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <button className="btn nav-link" onClick={() => this.props.openRepositoryModal()}>Reposistory</button>
+                            <button className="btn nav-link" data-toggle="modal" data-target="#repository-management-modal">Reposistory</button>
                         </li>
                         <li className="nav-item">
                             <button className="btn nav-link" onClick={() => this.props.fetch()}>Fetch</button>
@@ -37,7 +37,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-      openRepositoryModal: () => dispatch(openRepositoryModalAction()),
       fetch: () => dispatch(fetchAction()),
   }
 };
