@@ -9,7 +9,10 @@ import {statusAction} from "./status";
 export const fetchAction = () => {
     return (dispatch) => {
         if (GitService.isRepository(LocalStorageService.get(LOCALSTORAGE_DIRECTORY))) {
-            dispatch(statusAction(LocalStorageService.get(LOCALSTORAGE_DIRECTORY)));
+            GitService.fetch(LocalStorageService.get(LOCALSTORAGE_DIRECTORY))
+                .then(fetchSummary => {
+                    console.log(fetchSummary);
+                });
         }
     }
 };
