@@ -2,8 +2,12 @@ import React from "react";
 import {connect} from "react-redux";
 
 import {statusAction} from './../actions/git/status';
+import {refreshAction} from './../actions/git/refresh';
 
 import StagingSidebar from "../components/Git/Staging/StagingSidebar";
+
+import LocalBranch from "../containers/Git/Branch/LocalBranch";
+import RemoteBranch from "../containers/Git/Branch/RemoteBranch";
 import StageBlock from "../containers/Git/Staging/Block/StageBlock";
 import UnstageBlock from "../containers/Git/Staging/Block/UnstageBlock";
 import Commiter from "../containers/Git/Commiter";
@@ -18,7 +22,10 @@ class HomeController extends React.Component {
         return (
             <main id="dashboard">
                 <div className="dashboard-left">
-
+                    <div className="accordion">
+                        <LocalBranch />
+                        <RemoteBranch />
+                    </div>
                 </div>
                 <div className="dashboard-center">
 
@@ -44,12 +51,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        load: (user) => dispatch(function (user) {
-            dispatch(statusAction())
-        }),
-        refresh: (user) => dispatch(function (user) {
-            dispatch(statusAction())
-        }),
+        load: (user) => dispatch(user => {dispatch(statusAction())}),
+        refresh: (user) => dispatch((user) => dispatch(refreshAction())),
     }
 };
 

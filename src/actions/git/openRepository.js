@@ -10,13 +10,13 @@ import LocalStorageService from "../../services/LocalStorageService";
 
 export const openRepositoryModalAction = () => {
     return (dispatch) => {
-        $('#test').modal('show');
+        $('#repository-management-modal').modal('show');
     }
 };
 
 export const closeRepositoryModalAction = () => {
     return (dispatch) => {
-        $('#test').modal('hide');
+        $('#repository-management-modal').modal('hide');
     }
 };
 

@@ -10,7 +10,7 @@ class Modal extends React.Component {
     render() {
 
         return (
-            <div id="test" className="modal" tabIndex="-1" role="dialog">
+            <div id={this.props.id} className="modal" tabIndex="-1" role="dialog">
                 <div className={this.getClasses()} role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -28,6 +28,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string
 };

@@ -1,18 +1,19 @@
-import {SET_GIT_STATUS} from '../constantes/actions/gitConstantes';
+import {INIT_LOCAL_BRANCH, INIT_REMOTE_BRANCH, SET_GIT_STATUS} from '../constantes/actions/gitConstantes';
 
 const initialState = {
-    branches: {
-        local: [],
-        remote: [],
-        status: null
-    }
+    status: null,
+    branchLocal: [],
+    branchRemote: [],
 };
 
 const reducer = (state = initialState, payload) => {
-    console.log();
     switch (payload.type) {
         case SET_GIT_STATUS:
             return {...state, status: payload.data};
+        case INIT_LOCAL_BRANCH:
+            return {...state, branchLocal: payload.data};
+        case INIT_REMOTE_BRANCH:
+            return {...state, branchRemote: payload.data};
         default:
             return state;
     }

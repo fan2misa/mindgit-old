@@ -48,6 +48,26 @@ class Service {
             });
         });
     }
+
+    findLocalBranch(directory) {
+        const me = this;
+        return new Promise(function(resolve, reject) {
+            git(directory).branchLocal((err, branchSummary) => {
+                if (err) reject(err);
+                resolve(branchSummary);
+            });
+        });
+    }
+
+    findRemoteBranch(directory) {
+        const me = this;
+        return new Promise(function(resolve, reject) {
+            git(directory).branch({'-r': true}, (err, branchSummary) => {
+                if (err) reject(err);
+                resolve(branchSummary);
+            });
+        });
+    }
 }
 
 export default new Service();
