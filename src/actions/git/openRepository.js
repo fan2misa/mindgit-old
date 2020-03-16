@@ -7,6 +7,7 @@ import {LOCALSTORAGE_DIRECTORY} from "../../constantes/services/LocalStorageCons
 
 import {statusAction} from "./status";
 import LocalStorageService from "../../services/LocalStorageService";
+import {refreshAction} from "./refresh";
 
 export const openRepositoryModalAction = () => {
     return (dispatch) => {
@@ -38,9 +39,8 @@ export const openRepositoryAction = () => {
                 });
 
                 dispatch(closeRepositoryModalAction());
-
-                dispatch(statusAction());
+                dispatch(refreshAction());
             }
         });
     }
-}
+};

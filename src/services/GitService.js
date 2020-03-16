@@ -13,7 +13,12 @@ class Service {
 
     fetch(directory)
     {
-        git(directory).fetch();
+        return new Promise(function(resolve, reject) {
+            git(directory).fetch((err, fetchSummary) => {
+                if (err) reject(err);
+                resolve(fetchSummary);
+            });
+        });
     }
 
     status(directory) {
@@ -65,6 +70,16 @@ class Service {
             git(directory).branch({'-r': true}, (err, branchSummary) => {
                 if (err) reject(err);
                 resolve(branchSummary);
+            });
+        });
+    }
+
+    getRemotes(directory) {
+        const me = this;
+        return new Promise(function(resolve, reject) {
+            git(directory).getRemotes(true, (err, remotesObject) => {
+                if (err) reject(err);
+                resolve(remotesObject);
             });
         });
     }

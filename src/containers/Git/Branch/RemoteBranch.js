@@ -6,7 +6,6 @@ import CollapeCard from "../../../components/Card/CollapeCard";
 
 import {remoteBranchAction} from './../../../actions/git/remoteBranch';
 
-
 class RemoteBranch extends React.Component {
     componentDidMount() {
         this.props.getBranch();

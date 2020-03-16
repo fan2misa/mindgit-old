@@ -12,7 +12,6 @@ class LocalBranch extends React.Component {
     }
 
     render() {
-        console.log(this.props.branch);
         return (
             <CollapeCard id="branch-local" title="Local">
                 <ul className="list-unstyled">
