@@ -23,6 +23,12 @@
             .staging-block-file {
                 padding: 0.3rem;
 
+                .media-body {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
                 &:hover {
                     background-color: $staging-block-file-bg-color-hover;
                 }

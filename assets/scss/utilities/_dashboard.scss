@@ -1,5 +1,7 @@
 @import "./dashboard/staging-sidebar";
 @import "./dashboard/commiter";
+@import "./dashboard/branch-block/branch-block-local";
+@import "./dashboard/branch-block/branch-block-remote";
 
 main#dashboard {
   display: flex;
