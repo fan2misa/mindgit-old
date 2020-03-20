@@ -11,8 +11,16 @@ class Service {
         return fs.existsSync(directory);
     }
 
-    fetch(directory)
-    {
+    log(directory) {
+        return new Promise(function(resolve, reject) {
+            git(directory).log({'--all': true}, (err, ListLogSummary) => {
+                if (err) reject(err);
+                resolve(ListLogSummary.all);
+            });
+        });
+    }
+
+    fetch(directory) {
         return new Promise(function(resolve, reject) {
             git(directory).fetch((err, fetchSummary) => {
                 if (err) reject(err);
@@ -78,6 +86,16 @@ class Service {
         const me = this;
         return new Promise(function(resolve, reject) {
             git(directory).getRemotes(true, (err, remotesObject) => {
+                if (err) reject(err);
+                resolve(remotesObject);
+            });
+        });
+    }
+
+    show(directory, listLogLine) {
+        const me = this;
+        return new Promise(function(resolve, reject) {
+            git(directory).show({}, (err, remotesObject) => {
                 if (err) reject(err);
                 resolve(remotesObject);
             });
