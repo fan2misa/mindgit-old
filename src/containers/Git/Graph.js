@@ -1,6 +1,5 @@
 import React from "react";
 import connect from "react-redux/es/connect/connect";
-import GitGraphService from "../../services/GitGraphService";
 import BranchColumn from "../../components/Git/Graph/BranchColumn";
 
 class Graph extends React.Component {
@@ -8,7 +7,7 @@ class Graph extends React.Component {
         return (
             <tr key={key} className="commit-log">
                 <td className="commit-log-refs">
-                    <BranchColumn refs={GitGraphService.getRefs(commit)}/>
+                    <BranchColumn refs={commit.refs}/>
                 </td>
                 <td></td>
                 <td className="commit-log-message"><span>{commit.message}</span></td>
