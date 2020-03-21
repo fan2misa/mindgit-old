@@ -1,11 +1,9 @@
 import git from 'simple-git';
 import fs from 'fs';
+import {exec} from "child_process";
+import GitLogUtil from "../utils/GitLogUtil";
 
 class Service {
-
-    constructor() {
-
-    }
 
     isRepository(directory) {
         return fs.existsSync(directory);
@@ -13,9 +11,10 @@ class Service {
 
     log(directory) {
         return new Promise(function(resolve, reject) {
-            git(directory).log({'--all': true}, (err, ListLogSummary) => {
+            let cmd = `git log --all --oneline --pretty=format:"${GitLogUtil.prettyFormat}"`
+            exec(`cd ${directory} && ${cmd}`, (err, stdout) => {
                 if (err) reject(err);
-                resolve(ListLogSummary.all);
+                resolve(GitLogUtil.transform(stdout));
             });
         });
     }
