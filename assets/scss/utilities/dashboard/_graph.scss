@@ -10,9 +10,25 @@
         width: 100%;
 
         .commit-log {
+            cursor: pointer;
+
+            td {
+                margin: 0;
+                padding: 0;
+            }
 
             .commit-log-refs, .commit-log-author {
                 white-space: nowrap;
+            }
+
+            .commit-log-graph {
+                width: auto;
+                position: relative;
+
+                canvas {
+                    position: absolute;
+                    top: 0;
+                }
             }
 
             .commit-log-message {
@@ -32,6 +48,10 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+            }
+
+            &:hover {
+                background-color: $staging-block-file-bg-color-hover;
             }
         }
     }

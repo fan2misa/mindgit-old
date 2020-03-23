@@ -11,7 +11,7 @@ class Service {
 
     log(directory) {
         return new Promise(function(resolve, reject) {
-            let cmd = `git log --all --oneline --pretty=format:"${GitLogUtil.prettyFormat}"`
+            let cmd = `git log --all --pretty=format:"${GitLogUtil.prettyFormat}"`
             exec(`cd ${directory} && ${cmd}`, (err, stdout) => {
                 if (err) reject(err);
                 resolve(GitLogUtil.transform(stdout));

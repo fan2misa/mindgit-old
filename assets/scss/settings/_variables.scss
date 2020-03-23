@@ -36,6 +36,10 @@ $modal-content-border-color: darken($modal-content-bg, 5%);
 $modal-header-border-color: $modal-content-border-color;
 $modal-footer-border-color: $modal-content-border-color;
 
+// Dashboard
+$dashboard-sidebar-min-width: 375px;
+$dashboard-sidebar-max-width: 450px;
+
 // Staging Block
 $staging-block-body-bg-color: $color-primary;
 $staging-block-body-border-color: darken($staging-block-body-bg-color, 5%);

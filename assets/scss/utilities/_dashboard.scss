@@ -12,8 +12,8 @@ main#dashboard {
 
   .dashboard-left, .dashboard-right {
     height: auto;
-    min-width: 400px;
-    max-width: 500px;
+    min-width: $dashboard-sidebar-min-width;
+    max-width: $dashboard-sidebar-max-width;
     background-color: $dashboard-sidebar-bg-color;
     padding: 0.5rem;
   }
