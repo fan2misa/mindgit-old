@@ -1,4 +1,4 @@
-import {marge, radius} from "../../git-graph";
+import {marge, radius, arcRadius} from "../../git-graph";
 
 class GitGraphDrawer {
 
@@ -54,10 +54,12 @@ class GitGraphDrawer {
 
             if (this.commitData.level !== d.level) {
                 this.ctx.beginPath();
-                this.ctx.moveTo((((2 * d.level) - 1) * radius + d.level * marge), this.circleY);
+                this.ctx.moveTo((((2 * d.level) - 1) * radius + d.level * marge), this.circleY - arcRadius);
 
                 this.ctx.lineTo(((2 * d.level) - 1) * radius + d.level * marge, 0);
                 this.ctx.stroke();
+
+                this.drawStartArc(d);
             }
         });
     }
@@ -68,10 +70,12 @@ class GitGraphDrawer {
 
             if (this.commitData.level !== d.level) {
                 this.ctx.beginPath();
-                this.ctx.moveTo((((2 * d.level) - 1) * radius + d.level * marge), this.circleY);
+                this.ctx.moveTo((((2 * d.level) - 1) * radius + d.level * marge), this.circleY + arcRadius);
 
                 this.ctx.lineTo(((2 * d.level) - 1) * radius + d.level * marge, this.canvas.height);
                 this.ctx.stroke();
+
+                this.drawFinishArc(d);
             }
         });
     }
@@ -90,17 +94,33 @@ class GitGraphDrawer {
 
         if (this.commitData.level > data.level) {
             this.ctx.moveTo(this.circleX - radius, this.circleY);
-            this.ctx.lineTo((((2 * data.level) - 1) * radius + data.level * marge), this.circleY);
+            this.ctx.lineTo((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY);
         } else if (this.commitData.level < data.level) {
             this.ctx.moveTo(this.circleX + radius, this.circleY);
-            this.ctx.lineTo((((2 * data.level) - 1) * radius + data.level * marge), this.circleY);
+            this.ctx.lineTo((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY);
         }
 
         this.ctx.stroke();
+    }
 
-        // this.ctx.beginPath();
-        // this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - 5, this.circleY - 5, 5, 0, 0.5 * Math.PI, false);
-        // this.ctx.stroke();
+    drawStartArc(data) {
+        this.ctx.beginPath();
+        if (this.commitData.level > data.level) {
+            this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY - arcRadius, arcRadius, 0.5 * Math.PI, Math.PI, false);
+        } else if (this.commitData.level < data.level) {
+            this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY - arcRadius, arcRadius, 0, 0.5 * Math.PI, false);
+        }
+        this.ctx.stroke();
+    }
+
+    drawFinishArc(data) {
+        this.ctx.beginPath();
+        if (this.commitData.level > data.level) {
+            this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY + arcRadius, arcRadius, Math.PI, 1.5 * Math.PI, false);
+        } else if (this.commitData.level < data.level) {
+            this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY + arcRadius, arcRadius, 1.5 * Math.PI, 2 * Math.PI, false);
+        }
+        this.ctx.stroke();
     }
 }
 
