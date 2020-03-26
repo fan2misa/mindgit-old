@@ -29,10 +29,10 @@ class GitGraphInfo {
                     currentLevel = false;
                 }
 
-                this.branches.push(branchParent);
-                branchCurrent.finish.push(branchParent);
+                this.branches = [...this.branches, branchParent];
+                branchCurrent.finish = [...branchCurrent.finish, branchParent];
             } else {
-                this.branches[this.getIndex(parent)].start.push(branchCurrent);
+                this.branches[this.getIndex(parent)].start = [...this.branches[this.getIndex(parent)].start, branchCurrent];
             }
         });
 
@@ -46,7 +46,7 @@ class GitGraphInfo {
     createBranch(hash) {
         return {
             hash: hash,
-            level: this.branches.length + 1,
+            level: this.getLevelAvailable(),
             hasDirectParent: false,
             hasDirectChild: true,
             branches: [],
@@ -54,6 +54,29 @@ class GitGraphInfo {
             start: [],
             maxLevel: 1
         };
+    }
+
+    getLevelAvailable() {
+        let level = 0;
+        let finish = false;
+
+        let startBranches = [];
+        this.branches.forEach(branch => {
+            startBranches = [...startBranches, ...branch.start];
+        });
+
+        while (!finish) {
+            level++;
+
+            if (this.branches.filter(branch => branch.level === level).length === 0) {
+                if (startBranches.filter(branch => branch.level === level).length === 0) {
+                    finish = true;
+                }
+
+            }
+        }
+
+        return level;
     }
 
     getIndex(hash) {

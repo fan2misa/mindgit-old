@@ -94,7 +94,7 @@ class GitGraphDrawer {
 
         if (this.commitData.level > data.level) {
             this.ctx.moveTo(this.circleX - radius, this.circleY);
-            this.ctx.lineTo((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY);
+            this.ctx.lineTo((((2 * data.level) - 1) * radius + data.level * marge) + arcRadius, this.circleY);
         } else if (this.commitData.level < data.level) {
             this.ctx.moveTo(this.circleX + radius, this.circleY);
             this.ctx.lineTo((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY);
@@ -106,7 +106,7 @@ class GitGraphDrawer {
     drawStartArc(data) {
         this.ctx.beginPath();
         if (this.commitData.level > data.level) {
-            this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY - arcRadius, arcRadius, 0.5 * Math.PI, Math.PI, false);
+            this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) + arcRadius, this.circleY - arcRadius, arcRadius, 0.5 * Math.PI, Math.PI, false);
         } else if (this.commitData.level < data.level) {
             this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY - arcRadius, arcRadius, 0, 0.5 * Math.PI, false);
         }
@@ -116,7 +116,7 @@ class GitGraphDrawer {
     drawFinishArc(data) {
         this.ctx.beginPath();
         if (this.commitData.level > data.level) {
-            this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY + arcRadius, arcRadius, Math.PI, 1.5 * Math.PI, false);
+            this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) + arcRadius, this.circleY + arcRadius, arcRadius, Math.PI, 1.5 * Math.PI, false);
         } else if (this.commitData.level < data.level) {
             this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY + arcRadius, arcRadius, 1.5 * Math.PI, 2 * Math.PI, false);
         }
