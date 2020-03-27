@@ -25,6 +25,14 @@ class Commiter extends React.Component {
         });
     }
 
+    handleCommit(event) {
+        this.props.commit(this.state);
+        this.setState({
+            summary: '',
+            description: ''
+        });
+    }
+
     render() {
         return (
             <div className="commiter">
@@ -36,7 +44,7 @@ class Commiter extends React.Component {
                     <div className="form-group">
                         <textarea className="form-control" rows="3" placeholder="Description" data-key="description" value={this.state.description} onChange={this.handleChange.bind(this)}></textarea>
                     </div>
-                    <button className="btn btn-block btn-success" disabled={!this.commitButtonIsEnable()} onClick={() => this.props.commit(this.state)}>
+                    <button className="btn btn-block btn-success" disabled={!this.commitButtonIsEnable()} onClick={this.handleCommit.bind(this)}>
                         Commit
                     </button>
                 </div>
