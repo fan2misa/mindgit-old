@@ -16,6 +16,14 @@ export default {
         format: '%p',
         parser: value => value.split(' ').filter(parent => parent.length)
     },
+    tree: {
+        format: '%T',
+        parser: value => value
+    },
+    abbr_tree: {
+        format: '%t',
+        parser: value => value
+    },
     author_name: {
         format: '%aN',
         parser: value => value

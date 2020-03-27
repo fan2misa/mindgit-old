@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus, faMinus, faPenSquare } from '@fortawesome/free-solid-svg-icons';
 
-
 class StagingBlock extends React.Component {
     getButtonClasseName() {
         const classeNames = ["btn btn-sm", this.props.buttonType];
