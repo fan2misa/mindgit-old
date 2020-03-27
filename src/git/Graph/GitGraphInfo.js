@@ -18,25 +18,33 @@ class GitGraphInfo {
         branchCurrent.hasDirectChild = !!commit.abbr_parent.length;
 
         let currentLevel = true;
+
+        branchCurrent.branches = this.addOtherBranches(branchCurrent);
+
         commit.abbr_parent.forEach(parent => {
             let branchParent = this.getBranch(parent);
 
-            if (undefined === branchParent) {
-                branchParent = this.createBranch(parent);
+            if (undefined === branchParent || commit.abbr_parent.length === 2) {
+
+                let addParent = false;
+                if (undefined === branchParent) {
+                    branchParent = this.createBranch(parent);
+                    addParent = true;
+                }
 
                 if (currentLevel) {
                     branchParent.level = branchCurrent.level;
                     currentLevel = false;
                 }
 
-                this.branches = [...this.branches, branchParent];
+                if (addParent) {
+                    this.branches = [...this.branches, branchParent];
+                }
                 branchCurrent.finish = [...branchCurrent.finish, branchParent];
             } else {
                 this.branches[this.getIndex(parent)].start = [...this.branches[this.getIndex(parent)].start, branchCurrent];
             }
         });
-
-        branchCurrent.branches = this.addOtherBranches(branchCurrent);
 
         branchCurrent.maxLevel = this.getMaxLevel(branchCurrent);
 
@@ -95,8 +103,12 @@ class GitGraphInfo {
         let branches = [];
         branches = this.branches.filter(branch => !branchCurrent.finish.includes(branch));
 
-        branches.forEach(branch => {
-            branches = [...branches, ...branch.start.filter(s => s.hash !== branchCurrent.hash)];
+        this.branches.forEach(branch => {
+            branches = [
+                ...branches,
+                ...branch.start.filter(s => s.hash !== branchCurrent.hash),
+                ...branch.finish.filter(s => s.hash !== branchCurrent.hash)
+            ];
         });
 
         return branches;
