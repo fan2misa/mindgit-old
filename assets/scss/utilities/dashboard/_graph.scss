@@ -21,6 +21,24 @@
                 white-space: nowrap;
             }
 
+            .commit-log-refs {
+
+                .btn {
+                    padding: 0.125rem;
+                    font-size: 0.750rem;
+                }
+
+                .btn-group {
+
+                    .dropdown-menu {
+                        padding: 0;
+                        margin: 0.125rem 0 0;
+                        font-size: 0.750rem;
+                    }
+                }
+
+            }
+
             .commit-log-graph {
                 width: auto;
                 position: relative;

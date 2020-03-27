@@ -15,6 +15,6 @@ let store = createStore();
 
 store.dispatch(initializeAction());
 
-remote.app.on('browser-window-focus', () => store.dispatch(refreshAction()));
+// remote.app.on('browser-window-focus', () => store.dispatch(refreshAction()));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('app'));
