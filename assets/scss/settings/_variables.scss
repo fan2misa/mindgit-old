@@ -37,8 +37,10 @@ $modal-header-border-color: $modal-content-border-color;
 $modal-footer-border-color: $modal-content-border-color;
 
 // Dashboard
-$dashboard-sidebar-min-width: 375px;
-$dashboard-sidebar-max-width: 450px;
+$dashboard-sidebar-left-min-width: 300px;
+$dashboard-sidebar-left-max-width: 400px;
+$dashboard-sidebar-right-min-width: 375px;
+$dashboard-sidebar-right-max-width: 450px;
 
 // Staging Block
 $staging-block-body-bg-color: $color-primary;

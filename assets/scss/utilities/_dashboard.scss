@@ -12,8 +12,6 @@ main#dashboard {
 
   .dashboard-left, .dashboard-right {
     height: auto;
-    min-width: $dashboard-sidebar-min-width;
-    max-width: $dashboard-sidebar-max-width;
     background-color: $dashboard-sidebar-bg-color;
     padding: 0.5rem;
   }
@@ -21,6 +19,8 @@ main#dashboard {
   .dashboard-left {
     display: flex;
     flex-direction: column;
+    min-width: $dashboard-sidebar-left-min-width;
+    max-width: $dashboard-sidebar-left-max-width;
     border-right: 1px solid $dashboard-sidebar-border-color;
   }
 
@@ -38,6 +38,8 @@ main#dashboard {
   .dashboard-right {
     display: flex;
     flex-direction: column;
+    min-width: $dashboard-sidebar-right-min-width;
+    max-width: $dashboard-sidebar-right-max-width;
     border-left: 1px solid $dashboard-sidebar-border-color;
   }
 }

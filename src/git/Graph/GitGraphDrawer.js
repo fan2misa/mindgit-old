@@ -12,7 +12,7 @@ class GitGraphDrawer {
     }
 
     drawCommit() {
-        this.drawCommitCircle();
+        this.ctx.lineWidth = 2;
 
         this.drawDirectChildLine();
         this.drawDirectParentLine();
@@ -21,12 +21,14 @@ class GitGraphDrawer {
         this.drawFinishBranchesLine();
 
         this.drawOtherBranchesLine();
+
+        this.drawCommitCircle();
     }
 
     drawCommitCircle() {
+        this.ctx.beginPath();
         this.ctx.arc(this.circleX, this.circleY, radius, 0, 2 * Math.PI);
-        this.ctx.lineWidth = 2;
-        this.ctx.strokeStyle = 'red';
+        this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
         this.ctx.stroke();
     }
 
@@ -35,6 +37,7 @@ class GitGraphDrawer {
             this.ctx.beginPath();
             this.ctx.moveTo(this.circleX, this.circleY - radius);
             this.ctx.lineTo(this.circleX, 0);
+            this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
             this.ctx.stroke();
         }
     }
@@ -44,6 +47,7 @@ class GitGraphDrawer {
             this.ctx.beginPath();
             this.ctx.moveTo(this.circleX, this.circleY + radius);
             this.ctx.lineTo(this.circleX, this.canvas.height);
+            this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
             this.ctx.stroke();
         }
     }
@@ -57,6 +61,9 @@ class GitGraphDrawer {
                 this.ctx.moveTo((((2 * d.level) - 1) * radius + d.level * marge), this.circleY - arcRadius);
 
                 this.ctx.lineTo(((2 * d.level) - 1) * radius + d.level * marge, 0);
+
+                this.ctx.strokeStyle = this.getColorByLevel(d.level);
+
                 this.ctx.stroke();
 
                 this.drawStartArc(d);
@@ -73,6 +80,9 @@ class GitGraphDrawer {
                 this.ctx.moveTo((((2 * d.level) - 1) * radius + d.level * marge), this.circleY + arcRadius);
 
                 this.ctx.lineTo(((2 * d.level) - 1) * radius + d.level * marge, this.canvas.height);
+
+                this.ctx.strokeStyle = this.getColorByLevel(d.level);
+
                 this.ctx.stroke();
 
                 this.drawFinishArc(d);
@@ -85,6 +95,9 @@ class GitGraphDrawer {
             this.ctx.beginPath();
             this.ctx.moveTo(((2 * d.level) - 1) * radius + d.level * marge, 0);
             this.ctx.lineTo(((2 * d.level) - 1) * radius + d.level * marge, this.canvas.height);
+
+            this.ctx.strokeStyle = this.getColorByLevel(d.level);
+
             this.ctx.stroke();
         });
     }
@@ -100,6 +113,8 @@ class GitGraphDrawer {
             this.ctx.lineTo((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY);
         }
 
+        this.ctx.strokeStyle = this.getColorByLevel(data.level);
+
         this.ctx.stroke();
     }
 
@@ -110,6 +125,9 @@ class GitGraphDrawer {
         } else if (this.commitData.level < data.level) {
             this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY - arcRadius, arcRadius, 0, 0.5 * Math.PI, false);
         }
+
+        this.ctx.strokeStyle = this.getColorByLevel(data.level);
+
         this.ctx.stroke();
     }
 
@@ -120,7 +138,25 @@ class GitGraphDrawer {
         } else if (this.commitData.level < data.level) {
             this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY + arcRadius, arcRadius, 1.5 * Math.PI, 2 * Math.PI, false);
         }
+
+        this.ctx.strokeStyle = this.getColorByLevel(data.level);
+
         this.ctx.stroke();
+    }
+
+    getColorByLevel(level) {
+        let colors = [
+            '#16a085',
+            '#27ae60',
+            '#2980b9',
+            '#8e44ad',
+            '#f9ca24',
+            '#d35400',
+            '#c0392b',
+            '#7f8c8d',
+        ];
+
+        return colors[((level - 1) % colors.length)];
     }
 }
 
