@@ -4,6 +4,7 @@ import React from "react";
 import connect from "react-redux/es/connect/connect";
 
 import GitStatusUtil from './../../utils/GitStatusUtil';
+import {commitAction} from "../../actions/git/commit";
 
 class Commiter extends React.Component {
     constructor(props) {
@@ -18,8 +19,18 @@ class Commiter extends React.Component {
         return GitStatusUtil.hasStagedFiles(this.props.status) && this.state.summary;
     }
 
-    handleChange() {
-        this.setState({[event.target.getAttribute("data-key")]: event.target.value});
+    handleChange(event) {
+        this.setState({
+            [event.target.getAttribute("data-key")]: event.target.value
+        });
+    }
+
+    handleCommit(event) {
+        this.props.commit(this.state);
+        this.setState({
+            summary: '',
+            description: ''
+        });
     }
 
     render() {
@@ -33,7 +44,7 @@ class Commiter extends React.Component {
                     <div className="form-group">
                         <textarea className="form-control" rows="3" placeholder="Description" data-key="description" value={this.state.description} onChange={this.handleChange.bind(this)}></textarea>
                     </div>
-                    <button className="btn btn-block btn-success" disabled={!this.commitButtonIsEnable()} onClick={() => this.props.commit(this.state)}>
+                    <button className="btn btn-block btn-success" disabled={!this.commitButtonIsEnable()} onClick={this.handleCommit.bind(this)}>
                         Commit
                     </button>
                 </div>
@@ -50,7 +61,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        commit: (state) => console.log(state)
+        commit: (state) => dispatch(commitAction(state))
     }
 };
 

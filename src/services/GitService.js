@@ -63,6 +63,16 @@ class Service {
         });
     }
 
+    commit(directory, state) {
+        const me = this;
+        return new Promise(function(resolve, reject) {
+            git(directory).commit(state.summary, (err, status) => {
+                if (err) reject(err);
+                resolve(status);
+            });
+        });
+    }
+
     findLocalBranch(directory) {
         const me = this;
         return new Promise(function(resolve, reject) {
