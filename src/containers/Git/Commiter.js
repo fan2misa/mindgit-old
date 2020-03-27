@@ -4,6 +4,7 @@ import React from "react";
 import connect from "react-redux/es/connect/connect";
 
 import GitStatusUtil from './../../utils/GitStatusUtil';
+import {commitAction} from "../../actions/git/commit";
 
 class Commiter extends React.Component {
     constructor(props) {
@@ -18,8 +19,10 @@ class Commiter extends React.Component {
         return GitStatusUtil.hasStagedFiles(this.props.status) && this.state.summary;
     }
 
-    handleChange() {
-        this.setState({[event.target.getAttribute("data-key")]: event.target.value});
+    handleChange(event) {
+        this.setState({
+            [event.target.getAttribute("data-key")]: event.target.value
+        });
     }
 
     render() {
@@ -50,7 +53,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        commit: (state) => console.log(state)
+        commit: (state) => dispatch(commitAction(state))
     }
 };
 
