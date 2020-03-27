@@ -1,57 +1,14 @@
+
+import pretty from '../git-pretty';
+
 class GitLogUtil {
 
     constructor() {
-        this.splitterProperty = '|||';
-        this.splitterValue = ':::';
+        this.splitterCommit = 'f670514e-d491-41c8-a487-2bd77a44a84f';
+        this.splitterProperty = '92ed228d-93d7-47ee-a928-17717293dbd4';
+        this.splitterValue = '2e55c615-c505-455d-91c6-c6092358eb1e';
 
-        this.pretty = {
-            hash: {
-                format: '%H',
-                parser: value => value
-            },
-            abbreviated_hash: {
-                format: '%h',
-                parser: value => value
-            },
-            parent: {
-                format: '%P',
-                parser: value => value.split(' ')
-            },
-            abbreviated_parent: {
-                format: '%p',
-                parser: value => value.split(' ')
-            },
-            author_name: {
-                format: '%aN',
-                parser: value => value
-            },
-            author_email: {
-                format: '%ae',
-                parser: value => value
-            },
-            subject: {
-                format: '%s',
-                parser: value => value
-            },
-            body: {
-                format: '%b',
-                parser: value => value
-            },
-            date: {
-                format: '%ai',
-                parser: value => value
-            },
-            refs: {
-                format: '%D',
-                parser: value => value.split(', ')
-            },
-            message: {
-                format: '%s',
-                parser: value => value
-            }
-        };
-
-        this.prettyFormat = this.toString(this.pretty);
+        this.prettyFormat = this.toString(pretty);
     }
 
     toString(format) {
@@ -59,19 +16,30 @@ class GitLogUtil {
         for (var key in format) {
             result.push(`${key}${this.splitterValue}${format[key].format}`);
         }
-        return result.join(this.splitterProperty);
+        return result.join(this.splitterProperty) + this.splitterCommit;
     }
 
     transform(value) {
         let commits = [];
-        value.split('\n').forEach(commitString => {
+
+        value.split(this.splitterCommit).forEach(commitString => {
             let commit = {};
-            commitString.split(this.splitterProperty).forEach(commitValue => {
-                let data = commitValue.split(this.splitterValue);
-                commit[data[0]] = this.pretty[data[0]].parser(data[1]);
-            });
-            commits.push(commit);
+
+            if (commitString.length) {
+                commitString.split(this.splitterProperty).forEach(commitValue => {
+                    let data = commitValue.split(this.splitterValue);
+
+                    let key = data[0].replace(/(\r\n|\n|\r)/g, "");
+                    let value = data[1];
+
+                    commit[key] = pretty[key].parser(value);
+                });
+
+                commits.push(commit);
+            }
+
         });
+
         return commits;
     }
 }

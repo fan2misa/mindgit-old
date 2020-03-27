@@ -9,9 +9,11 @@ class Service {
         return fs.existsSync(directory);
     }
 
-    log(directory) {
+    log(directory, skip, maxCount) {
+        skip = skip || 0;
+        maxCount = maxCount || 100;
         return new Promise(function(resolve, reject) {
-            let cmd = `git log --all --oneline --pretty=format:"${GitLogUtil.prettyFormat}"`
+            let cmd = `git log --all --skip=${skip} --max-count=${maxCount} --pretty=format:"${GitLogUtil.prettyFormat}"`
             exec(`cd ${directory} && ${cmd}`, (err, stdout) => {
                 if (err) reject(err);
                 resolve(GitLogUtil.transform(stdout));

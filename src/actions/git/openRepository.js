@@ -4,8 +4,8 @@ import $ from 'jquery';
 
 import {SET_CURRENT_DIRECTORY} from './../../constantes/actions/appConstantes';
 import {LOCALSTORAGE_DIRECTORY} from "../../constantes/services/LocalStorageConstante";
+import {SET_GIT_COMMITS} from "../../constantes/actions/gitConstantes";
 
-import {statusAction} from "./status";
 import LocalStorageService from "../../services/LocalStorageService";
 import {refreshAction} from "./refresh";
 
@@ -29,6 +29,12 @@ export const openRepositoryAction = () => {
             properties: ['openDirectory']
         }).then(result => {
             if (result.filePaths.length) {
+
+                dispatch({
+                    type: SET_GIT_COMMITS,
+                    data: []
+                });
+
                 let directory = result.filePaths[0];
 
                 LocalStorageService.set(LOCALSTORAGE_DIRECTORY, directory);
