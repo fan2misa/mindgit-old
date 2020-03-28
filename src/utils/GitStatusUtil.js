@@ -1,9 +1,5 @@
 class GitStatusUtil {
 
-    constructor() {
-
-    }
-
     hasStagedFiles(status)
     {
         if (status) {
