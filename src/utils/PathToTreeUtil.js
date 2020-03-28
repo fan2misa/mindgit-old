@@ -1,9 +1,13 @@
 class PathToTreeUtil {
-    get(paths) {
+    get(paths, callback) {
+        if (undefined === callback) {
+            callback = (value) => value;
+        }
+
         let tree = [];
 
         for (let i = 0; i < paths.length; i++) {
-            let path = paths[i].split('/');
+            let path = callback(paths[i]).split('/');
             let currentLevel = tree;
             for (let j = 0; j < path.length; j++) {
                 let part = path[j];
