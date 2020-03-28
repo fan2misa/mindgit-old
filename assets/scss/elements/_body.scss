@@ -4,3 +4,24 @@ html, body {
   background-color: $color-primary;
   user-select: none;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  padding: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darken($color-primary, 5%);
+  border-radius: 10px;
+  margin: 3px;
+}
