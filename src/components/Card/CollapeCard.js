@@ -22,7 +22,7 @@ class CollapeCard extends React.Component {
                     <div className="media">
                         {this.getIcon()}
                         <div className="media-body">
-                            {this.props.title}
+                            {this.props.title.toUpperCase()}
                         </div>
                     </div>
                 </div>
