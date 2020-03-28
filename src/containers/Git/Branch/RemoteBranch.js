@@ -7,7 +7,7 @@ import CollapeCard from "../../../components/Card/CollapeCard";
 import {remoteBranchAction} from './../../../actions/git/remoteBranch';
 import PathToTreeUtil from "../../../utils/PathToTreeUtil";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCrosshairs, faCodeBranch, faFolder} from "@fortawesome/free-solid-svg-icons";
+import {faCloud, faCrosshairs, faCodeBranch, faFolder} from "@fortawesome/free-solid-svg-icons";
 
 class RemoteBranch extends React.Component {
     constructor(props) {
@@ -50,7 +50,7 @@ class RemoteBranch extends React.Component {
 
     render() {
         return (
-        <CollapeCard id="branch-remote" title="Remote">
+        <CollapeCard id="branch-remote" title="Remote" icon={faCloud}>
             <ul className="list-unstyled">
                 {this.props.branch.map(branch => {
                     return <li key={branch.name}>

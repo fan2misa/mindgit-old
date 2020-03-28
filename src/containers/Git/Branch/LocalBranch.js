@@ -5,7 +5,7 @@ import connect from "react-redux/es/connect/connect";
 import CollapeCard from "../../../components/Card/CollapeCard";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCodeBranch, faFolder } from '@fortawesome/free-solid-svg-icons';
+import { faDesktop, faCodeBranch, faFolder } from '@fortawesome/free-solid-svg-icons';
 
 import {localBranchAction} from './../../../actions/git/localBranch';
 import PathToTreeUtil from "../../../utils/PathToTreeUtil";
@@ -45,10 +45,8 @@ class LocalBranch extends React.Component {
     }
 
     render() {
-        console.log(this.props.branch);
-
         return (
-            <CollapeCard id="branch-local" title="Local">
+            <CollapeCard id="branch-local" title="Local" icon={faDesktop}>
                 <ul className="list-unstyled">
                     {this.props.branch.map(branch => {
                         return <li key={branch.name}>

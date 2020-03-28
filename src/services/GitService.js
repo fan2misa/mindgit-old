@@ -34,6 +34,15 @@ class Service {
         return new Promise(function(resolve, reject) {
             git(directory).status((err, status) => {
                 if (err) reject(err);
+
+                // CORRECTION D'UN BUG DANS LA LIBRAIRIE
+                status.created = status.created.map(file => file.replace(/"/gi, ''));
+                status.files.map(file => {
+                    file.path = file.path.replace(/"/gi, '');
+                    return file;
+                });
+
+                console.log(status);
                 resolve(status);
             });
         });
