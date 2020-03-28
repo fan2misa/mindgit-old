@@ -14,6 +14,7 @@ main#dashboard {
     height: auto;
     background-color: $dashboard-sidebar-bg-color;
     padding: 0.5rem;
+    overflow-y: auto;
   }
 
   .dashboard-left {
