@@ -13,7 +13,7 @@ class BranchColumn extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const me = this;
         const headRegex = /^HEAD -> (.*)$/g;
         const localRegex = /^refs\/heads\/(.*)$/g;
