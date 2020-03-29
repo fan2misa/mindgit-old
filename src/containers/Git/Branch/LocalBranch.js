@@ -20,11 +20,17 @@ class LocalBranch extends React.Component {
         return branch.children.length ? faFolder : faCodeBranch;
     }
 
+    getBranchClassName(branch) {
+        if (null !== this.props.current && branch.hasOwnProperty('value') && branch.value === this.props.current.name) {
+            return 'active';
+        }
+    }
+
     getSub(name, children) {
         if (children.length) {
             return <ul id={"local" + name} className="list-unstyled">
                 {children.map(branch => {
-                    return <li key={branch.name}>
+                    return <li key={branch.name} className={this.getBranchClassName(branch)}>
                         <div className="media">
                             <div style={{width: 20}}>
                                 <FontAwesomeIcon className="align-self-center" icon={this.getIcon(branch)} />
@@ -49,7 +55,7 @@ class LocalBranch extends React.Component {
             <CollapeCard id="branch-local" title="Local" icon={faDesktop}>
                 <ul className="list-unstyled">
                     {this.props.branch.map(branch => {
-                        return <li key={branch.name}>
+                        return <li key={branch.name} className={this.getBranchClassName(branch)}>
                             <div className="media">
                                 <div style={{width: 20}}>
                                     <FontAwesomeIcon icon={this.getIcon(branch)} />
@@ -72,8 +78,18 @@ class LocalBranch extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    let current = null;
+    let currents = Object.keys(state.git.branchLocal)
+        .map(key => state.git.branchLocal[key])
+        .filter(branch => branch.current === true);
+
+    if (currents.length) {
+        current = currents[0];
+    }
+
     return {
-        branch: PathToTreeUtil.get(Object.keys(state.git.branchLocal))
+        branch: PathToTreeUtil.get(Object.keys(state.git.branchLocal)),
+        current: current,
     }
 };
 
