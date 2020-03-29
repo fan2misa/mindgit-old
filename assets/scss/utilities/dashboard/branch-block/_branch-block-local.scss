@@ -1,7 +1,11 @@
 #branch-local {
-  li {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+    li {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &.active {
+          background-color: $branch-list-current-bg;
+        }
+    }
 }

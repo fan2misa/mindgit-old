@@ -8,7 +8,7 @@ import {
 
 const initialState = {
     status: null,
-    branchLocal: [],
+    branchLocal: {},
     branchRemote: [],
     commits: [],
 };
@@ -31,4 +31,3 @@ const reducer = (state = initialState, payload) => {
 };
 
 export default reducer;
-SET_GIT_COMMITS

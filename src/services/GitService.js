@@ -42,7 +42,6 @@ class Service {
                     return file;
                 });
 
-                console.log(status);
                 resolve(status);
             });
         });

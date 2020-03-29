@@ -48,6 +48,9 @@ $dashboard-sidebar-left-max-width: 400px;
 $dashboard-sidebar-right-min-width: 375px;
 $dashboard-sidebar-right-max-width: 450px;
 
+// Branch List
+$branch-list-current-bg: rgba($color-secondary, 0.3);
+
 // Staging Block
 $staging-block-body-bg-color: $color-primary;
 $staging-block-body-border-color: darken($staging-block-body-bg-color, 5%);
