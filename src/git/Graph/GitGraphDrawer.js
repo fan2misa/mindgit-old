@@ -12,6 +12,7 @@ class GitGraphDrawer {
     }
 
     drawCommit() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.lineWidth = 2;
 
         this.drawDirectChildLine();

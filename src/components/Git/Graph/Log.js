@@ -13,16 +13,7 @@ class Log extends React.Component {
         };
     }
 
-    computeWidth(level) {
-        return (2 * level * radius) + (level + 1) * marge;
-    }
-
-    computeHeight() {
-        let height = 2 * radius + 2 * marge;
-        return height > 30 ? height : 30;
-    }
-
-    componentWillMount() {
+    componentDidMount() {
         let data = this.props.gitGraphInfo.init(this.props.commit);
 
         this.setState({
@@ -31,9 +22,18 @@ class Log extends React.Component {
         });
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
         let gitGraphDrawer = new GitGraphDrawer(this.state.data, this.refs["canvas"]);
         gitGraphDrawer.drawCommit();
+    }
+
+    computeWidth(level) {
+        return (2 * level * radius) + (level + 1) * marge;
+    }
+
+    computeHeight() {
+        let height = 2 * radius + 2 * marge;
+        return height > 30 ? height : 30;
     }
 
     render() {
