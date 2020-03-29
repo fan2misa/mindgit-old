@@ -86,13 +86,21 @@ class BranchColumn extends React.Component {
     }
 
     renderButton() {
+        let className = ['btn btn-secondary btn-sm'];
+
+        if (null !== this.state.head) {
+            className.push('active');
+        }
+
         if (Object.keys(this.state.refs).length === 1) {
-            return <button type="button" className="btn btn-secondary btn-sm">
+            return <button type="button" className={className.join(' ')}>
                 {this.getTitleButton()}
             </button>
         } else if (Object.keys(this.state.refs).length) {
+            className.push('dropdown-toggle');
+            
             return <div className="btn-group">
-                <button type="button" className="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">
+                <button type="button" className={className.join(' ')} data-toggle="dropdown">
                     {this.getTitleButton()}
                 </button>
                 <div className="dropdown-menu dropdown-menu-right">
