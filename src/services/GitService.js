@@ -3,7 +3,7 @@ import fs from 'fs';
 import {exec} from "child_process";
 import GitLogUtil from "../utils/GitLogUtil";
 
-class Service {
+class GitService {
 
     isRepository(directory) {
         return fs.existsSync(directory);
@@ -26,6 +26,35 @@ class Service {
             git(directory).fetch((err, fetchSummary) => {
                 if (err) reject(err);
                 resolve(fetchSummary);
+            });
+        });
+    }
+
+    getRemotes(directory) {
+        const me = this;
+        return new Promise(function(resolve, reject) {
+            git(directory).getRemotes((err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            });
+        });
+    }
+
+    pull(directory) {
+        return new Promise(function(resolve, reject) {
+            git(directory).pull((err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            });
+        });
+    }
+
+    push(directory, remote, branch, options) {
+        const me = this;
+        return new Promise(function(resolve, reject) {
+            git(directory).push(['push', remote, branch.name, ...options], options, (err, data) => {
+                if (err) reject(err);
+                resolve();
             });
         });
     }
@@ -122,4 +151,4 @@ class Service {
     }
 }
 
-export default new Service();
+export default new GitService();

@@ -11,6 +11,7 @@ import AboutController from './controllers/AboutController';
 import Topbar from './containers/Topbar';
 import Footer from "./containers/Footer";
 import RepositoriesModal from "./containers/RepositoriesModal";
+import Modal from "./components/Modal/Modal";
 
 class App extends React.Component {
     render() {
@@ -20,10 +21,8 @@ class App extends React.Component {
                 <Route path="/" exact component={HomeController} />
                 <Route path="/about" exact component={AboutController} />
                 <Footer />
-                <RepositoriesModal>
-                    <h1>test</h1>
-                    <h2>test2</h2>
-                </RepositoriesModal>
+                <RepositoriesModal />
+                <Modal id="main-modal" type={this.props.modal.type} title={this.props.modal.title} children={this.props.modal.body} />
             </Router>
         </div>;
     }
@@ -31,7 +30,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.app.user
+        user: state.app.user,
+        modal: state.modal
     }
 };
 

@@ -2,7 +2,6 @@
 import electron from 'electron';
 import $ from 'jquery';
 
-import {SET_CURRENT_DIRECTORY} from './../../constantes/actions/appConstantes';
 import {LOCALSTORAGE_DIRECTORY} from "../../constantes/services/LocalStorageConstante";
 import {SET_GIT_COMMITS} from "../../constantes/actions/gitConstantes";
 
@@ -38,11 +37,6 @@ export const openRepositoryAction = () => {
                 let directory = result.filePaths[0];
 
                 LocalStorageService.set(LOCALSTORAGE_DIRECTORY, directory);
-
-                dispatch({
-                    type: SET_CURRENT_DIRECTORY,
-                    data: directory
-                });
 
                 dispatch(closeRepositoryModalAction());
                 dispatch(refreshAction());
