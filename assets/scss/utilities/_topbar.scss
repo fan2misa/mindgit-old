@@ -7,5 +7,18 @@
         .btn.nav-link {
             padding: 0.5rem;
         }
+
+        .user {
+            text-align: right;
+
+            .name {
+                font-size: 0.875rem;
+            }
+
+            .email {
+                font-size: 0.750em;
+                color: $gray-600;
+            }
+        }
     }
 }

@@ -9,6 +9,24 @@ class GitService {
         return fs.existsSync(directory);
     }
 
+    getUserName(directory) {
+        return this.getConfig(directory, 'user.name');
+    }
+
+    getUserEmail(directory) {
+        return this.getConfig(directory, 'user.email');
+    }
+
+    getConfig(directory, configname) {
+        return new Promise(function(resolve, reject) {
+            let cmd = `git config ${configname}`;
+            exec(`cd ${directory} && ${cmd}`, (err, stdout) => {
+                if (err) reject(err);
+                resolve(stdout);
+            });
+        });
+    }
+
     log(directory, skip, maxCount) {
         skip = skip || 0;
         maxCount = maxCount || 100;
