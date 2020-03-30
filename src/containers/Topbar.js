@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
+import gravatar from 'gravatar';
 
 import {fetchAction} from "../actions/git/fetch";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -42,9 +43,14 @@ class Navbar extends React.Component {
                 </ul>
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <div className="user">
-                            <div className="name">{this.props.user.name}</div>
-                            <div className="email">{this.props.user.email}</div>
+                        <div className="media">
+                            <img src={gravatar.url(this.props.user.email, {size: '30', rating: 'pg', d: 'retro'}, true)} className="align-self-center mr-1" />
+                            <div className="media-body">
+                                <div className="user">
+                                    <div className="name">{this.props.user.name}</div>
+                                    <div className="email">{this.props.user.email}</div>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </ul>
