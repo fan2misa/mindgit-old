@@ -1,7 +1,11 @@
 #topbar {
-  border-bottom: 1px solid $topbar-border-color;
+    border-bottom: 1px solid $topbar-border-color;
 
-  #topbarNav {
-    justify-content: space-between;
-  }
+    .navbar-nav {
+        flex-direction: row;
+
+        .btn.nav-link {
+            padding: 0.5rem;
+        }
+    }
 }

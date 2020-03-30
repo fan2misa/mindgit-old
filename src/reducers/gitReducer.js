@@ -8,6 +8,7 @@ import {
 
 const initialState = {
     status: null,
+    current: null,
     branchLocal: {},
     branchRemote: [],
     commits: [],
@@ -22,7 +23,9 @@ const reducer = (state = initialState, payload) => {
         case SET_GIT_COMMITS:
             return {...state, commits: payload.data};
         case INIT_LOCAL_BRANCH:
-            return {...state, branchLocal: payload.data};
+            let current = Object.keys(payload.data).map(key => payload.data[key]).filter(branch => branch.current);
+            current = current.length ? current[0] : null;
+            return {...state, branchLocal: payload.data, current: current};
         case INIT_REMOTE_BRANCH:
             return {...state, branchRemote: payload.data};
         default:
