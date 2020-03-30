@@ -6,7 +6,6 @@ import GitService from '../../services/GitService';
 import {LOCALSTORAGE_DIRECTORY} from '../../constantes/services/LocalStorageConstante';
 import {refreshAction} from "./refresh";
 import {closeMainModalAction, openMainModalAction} from "../modal/openModal";
-import {SET_LOAD} from "../../constantes/actions/loadConstantes";
 import {startLoadAction, stopLoadAction} from "../app";
 
 export const pushAction = (currentBranch, options) => {

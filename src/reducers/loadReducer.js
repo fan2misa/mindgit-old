@@ -3,7 +3,8 @@ import {SET_LOAD} from '../constantes/actions/loadConstantes';
 
 const initialState = {
     pull: false,
-    push: false
+    push: false,
+    logs: false
 };
 
 const reducer = (state = initialState, payload) => {
