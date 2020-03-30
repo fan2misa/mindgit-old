@@ -6,10 +6,13 @@ import GitService from '../../services/GitService';
 import {LOCALSTORAGE_DIRECTORY} from '../../constantes/services/LocalStorageConstante';
 import {refreshAction} from "./refresh";
 import {closeMainModalAction, openMainModalAction} from "../modal/openModal";
+import {SET_LOAD} from "../../constantes/actions/loadConstantes";
+import {startLoadAction, stopLoadAction} from "../app";
 
 export const pushAction = (currentBranch, options) => {
     return (dispatch) => {
         if (GitService.isRepository(LocalStorageService.get(LOCALSTORAGE_DIRECTORY))) {
+            dispatch(startLoadAction('push'));
             GitService.getRemotes(LocalStorageService.get(LOCALSTORAGE_DIRECTORY))
                 .then(data => {
                     if (data.length === 1) {
@@ -24,7 +27,8 @@ export const pushAction = (currentBranch, options) => {
                                     Force Push
                                 </button>;
                                 dispatch(openMainModalAction('modal-lg', 'Git Error', body, footer));
-                            });
+                            })
+                            .finally(() => dispatch(stopLoadAction('push')));
                     }
                 });
         }

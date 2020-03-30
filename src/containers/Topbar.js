@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {fetchAction} from "../actions/git/fetch";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faFolderOpen, faSync, faDownload, faUpload} from '@fortawesome/free-solid-svg-icons';
+import {faFolderOpen, faSync, faDownload, faUpload, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import {pullAction} from "../actions/git/pull";
 import {pushAction} from "../actions/git/push";
 
@@ -32,7 +32,9 @@ class Navbar extends React.Component {
                     </li>
                     <li className="nav-item">
                         <button className="btn nav-link" onClick={() => this.props.push(this.props.currentBranch)}>
-                            <FontAwesomeIcon icon={faUpload} data-toggle="tooltip" data-placement="bottom" title="Push" />
+                            {this.props.loadPush
+                                ? <FontAwesomeIcon icon={faSpinner} pulse data-toggle="tooltip" data-placement="bottom" title="Push" />
+                                : <FontAwesomeIcon icon={faUpload} data-toggle="tooltip" data-placement="bottom" title="Push" />}
                         </button>
                     </li>
                 </ul>
@@ -50,7 +52,8 @@ class Navbar extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        currentBranch: state.git.current
+        currentBranch: state.git.current,
+        loadPush: state.load.push,
     }
 };
 
