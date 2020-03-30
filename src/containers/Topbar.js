@@ -15,24 +15,24 @@ class Navbar extends React.Component {
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <button className="btn nav-link" data-toggle="modal" data-target="#repository-management-modal">
-                            <FontAwesomeIcon icon={faFolderOpen}/>
+                            <FontAwesomeIcon icon={faFolderOpen} data-toggle="tooltip" data-placement="bottom" title="Open Repository" />
                         </button>
                     </li>
                     <li className="nav-item">
                         <button className="btn nav-link" onClick={this.props.fetch}>
-                            <FontAwesomeIcon icon={faSync}/>
+                            <FontAwesomeIcon icon={faSync} data-toggle="tooltip" data-placement="bottom" title="Fetch" />
                         </button>
                     </li>
                 </ul>
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <button className="btn nav-link" onClick={() => this.props.pull(this.props.currentBranch)}>
-                            <FontAwesomeIcon icon={faDownload}/>
+                            <FontAwesomeIcon icon={faDownload} data-toggle="tooltip" data-placement="bottom" title="Pull" />
                         </button>
                     </li>
                     <li className="nav-item">
                         <button className="btn nav-link" onClick={() => this.props.push(this.props.currentBranch)}>
-                            <FontAwesomeIcon icon={faUpload}/>
+                            <FontAwesomeIcon icon={faUpload} data-toggle="tooltip" data-placement="bottom" title="Push" />
                         </button>
                     </li>
                 </ul>
