@@ -40,6 +40,15 @@ class GitService {
         });
     }
 
+    pull(directory) {
+        return new Promise(function(resolve, reject) {
+            git(directory).pull((err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            });
+        });
+    }
+
     push(directory, remote, branch, options) {
         const me = this;
         return new Promise(function(resolve, reject) {

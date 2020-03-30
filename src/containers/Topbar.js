@@ -27,7 +27,9 @@ class Navbar extends React.Component {
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <button className="btn nav-link" onClick={() => this.props.pull(this.props.currentBranch)}>
-                            <FontAwesomeIcon icon={faDownload} data-toggle="tooltip" data-placement="bottom" title="Pull" />
+                            {this.props.loadPull
+                                ? <FontAwesomeIcon icon={faSpinner} pulse data-toggle="tooltip" data-placement="bottom" title="Pull" />
+                                : <FontAwesomeIcon icon={faDownload} data-toggle="tooltip" data-placement="bottom" title="Pull" />}
                         </button>
                     </li>
                     <li className="nav-item">
@@ -53,6 +55,7 @@ class Navbar extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         currentBranch: state.git.current,
+        loadPull: state.load.pull,
         loadPush: state.load.push,
     }
 };
