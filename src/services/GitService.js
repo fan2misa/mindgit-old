@@ -12,11 +12,34 @@ class GitService {
     log(directory, skip, maxCount) {
         skip = skip || 0;
         maxCount = maxCount || 100;
+
         return new Promise(function(resolve, reject) {
-            let cmd = `git log --all --skip=${skip} --max-count=${maxCount} --pretty=format:"${GitLogUtil.prettyFormat}" --decorate=full`
+            let cmd = `git log --all --skip=${skip} --max-count=${maxCount} --pretty=format:"${GitLogUtil.prettyFormat}" --decorate=full`;
             exec(`cd ${directory} && ${cmd}`, (err, stdout) => {
                 if (err) reject(err);
                 resolve(GitLogUtil.transform(stdout));
+            });
+        });
+    }
+
+    countCommits(directory) {
+        return new Promise(function(resolve, reject) {
+            let cmd = `git rev-list --count --all`;
+            exec(`cd ${directory} && ${cmd}`, (err, stdout) => {
+                if (err) reject(err);
+                resolve(parseInt(stdout));
+            });
+        });
+    }
+
+    countCommitsGroupByAuthor(directory) {
+        return new Promise(function(resolve, reject) {
+            let cmd = `git shortlog -s`;
+            console.log('shortlog start');
+            exec(`cd ${directory} && ${cmd}`, (err, stdout) => {
+                console.log('shortlog end', err, stdout);
+                if (err) reject(err);
+                resolve(stdout);
             });
         });
     }
