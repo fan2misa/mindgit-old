@@ -1,5 +1,6 @@
 import {resetAction} from "../actions/git/reset";
 import {GIT_RESET_HARD, GIT_RESET_MIXED, GIT_RESET_SOFT} from "../constantes/services/GitConstante";
+import {revertAction} from "../actions/git/revert";
 
 export default class LogContextualMenuTemplate {
 
@@ -11,6 +12,14 @@ export default class LogContextualMenuTemplate {
 
     get() {
         return [
+            {
+                label: 'Create branch here (TODO)',
+                click: () => console.log("Create branch here Action")
+            },
+            {
+                label: 'Cherry pick commit (TODO)',
+                click: () => console.log("Cherry pick commit Action")
+            },
             {
                 label: `Reset ${this.currentBranch.name} to this commit`,
                 submenu : [
@@ -27,6 +36,10 @@ export default class LogContextualMenuTemplate {
                         click: () => this.dispatch(resetAction(GIT_RESET_HARD, [this.commit.hash]))
                     }
                 ]
+            },
+            {
+                label: 'Revert commit',
+                click: () => this.dispatch(revertAction(this.commit))
             },
         ];
     }

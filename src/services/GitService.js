@@ -80,6 +80,15 @@ class GitService {
         });
     }
 
+    revert(directory, commit) {
+        return new Promise(function(resolve, reject) {
+            git(directory).revert(commit.hash, (err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            });
+        });
+    }
+
     getRemotes(directory) {
         const me = this;
         return new Promise(function(resolve, reject) {
