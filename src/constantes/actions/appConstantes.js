@@ -1,2 +1,3 @@
 
-export const SET_CURRENT_USER = 'app/set-current-user';
+export const SET_CURRENT_USER_NAME = 'app/set-current-user-name';
+export const SET_CURRENT_USER_EMAIL = 'app/set-current-user-email';
