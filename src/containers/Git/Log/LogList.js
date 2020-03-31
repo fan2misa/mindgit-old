@@ -1,10 +1,13 @@
 import React from "react";
+import { remote } from 'electron';
 import connect from "react-redux/es/connect/connect";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSpinner} from '@fortawesome/free-solid-svg-icons';
 
 import Log from "../../../components/Git/Graph/Log";
 import GitGraphInfo from "../../../git/Graph/GitGraphInfo";
+
+import LogContextualMenuTemplate from "../../../menu/LogContextualMenuTemplate";
 
 class LogList extends React.Component {
     renderLoader() {
@@ -13,10 +16,18 @@ class LogList extends React.Component {
         </div>;
     }
 
+    getMenu(commit) {
+        return remote.Menu.buildFromTemplate(this.props.getLogContextualMenuTemplate(this.props.currentBranch, commit).get())
+    }
+
     renderLogs() {
         return <table className="commit-log-list">
             <tbody>
-            {this.props.commits.map((commit, key) => <Log key={key} commit={commit} gitGraphInfo={this.props.gitGraphInfo} />)}
+            {this.props.commits.map((commit, key) =>
+                <Log key={key}
+                     commit={commit}
+                     menu={this.getMenu(commit)}
+                     gitGraphInfo={this.props.gitGraphInfo} />)}
             </tbody>
         </table>;
     }
@@ -32,6 +43,7 @@ class LogList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        currentBranch: state.git.current,
         commits: state.git.commits,
         loadLogs: state.load.logs,
         gitGraphInfo: new GitGraphInfo(),
@@ -40,6 +52,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
+        getLogContextualMenuTemplate: (currentBranch, commit) => new LogContextualMenuTemplate(dispatch, currentBranch, commit)
     }
 };
 

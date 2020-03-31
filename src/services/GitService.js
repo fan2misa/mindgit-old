@@ -71,6 +71,15 @@ class GitService {
         });
     }
 
+    reset(directory, mode, options) {
+        return new Promise(function(resolve, reject) {
+            git(directory).reset([`--${mode}`, ...options], (err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            });
+        });
+    }
+
     getRemotes(directory) {
         const me = this;
         return new Promise(function(resolve, reject) {
