@@ -15,9 +15,9 @@ class BranchColumn extends React.Component {
 
     componentDidMount() {
         const me = this;
-        const headRegex = /^HEAD -> (.*)$/g;
-        const localRegex = /^refs\/heads\/(.*)$/g;
-        const remoteRegex = /^refs\/remotes\/([^\/]*)\/(.*)$/g;
+        const headRegex = /^HEAD -> (.*)$/;
+        const localRegex = /^refs\/heads\/(.*)$/;
+        const remoteRegex = /^refs\/remotes\/([^\/]*)\/(.*)$/;
 
         let head = null;
         let refs = {};
@@ -42,7 +42,7 @@ class BranchColumn extends React.Component {
                     refs[localRegexMatch[1]].local = true;
                 }
 
-                if (null !== remoteRegexMatch) {
+                if (null !== remoteRegexMatch && remoteRegexMatch[2] !== 'HEAD') {
                     if (!refs.hasOwnProperty(remoteRegexMatch[2])) {
                         refs[remoteRegexMatch[2]] = me.createRef();
                     }
