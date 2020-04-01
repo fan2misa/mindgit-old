@@ -34,6 +34,10 @@
                     background-color: $staging-block-file-bg-color-hover;
                 }
             }
+
+            li .list-unstyled {
+                margin-left: 20px;
+            }
         }
     }
 }
