@@ -17,7 +17,7 @@ class CheckoutLocalBranchForm extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.submit(this.state);
+        this.props.submit(this.state, this.props.commit);
         this.setState({
             name: '',
         });
@@ -42,10 +42,12 @@ class CheckoutLocalBranchForm extends React.Component {
 }
 
 CheckoutLocalBranchForm.propTypes = {
-    submit: PropTypes.func.isRequired
+    submit: PropTypes.func.isRequired,
+    commit: PropTypes.object
 };
 
 CheckoutLocalBranchForm.defaultProps = {
+    commit: null
 };
 
 export default CheckoutLocalBranchForm;

@@ -89,6 +89,21 @@ class GitService {
         });
     }
 
+    checkout(directory, branch, commit) {
+        let options = ['-b', branch.name];
+
+        if (!!commit) {
+            options.push(commit.hash);
+        }
+
+        return new Promise(function(resolve, reject) {
+            git(directory).checkout(options, (err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            });
+        });
+    }
+
     getRemotes(directory) {
         const me = this;
         return new Promise(function(resolve, reject) {

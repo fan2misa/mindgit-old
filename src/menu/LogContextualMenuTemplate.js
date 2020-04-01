@@ -14,8 +14,8 @@ export default class LogContextualMenuTemplate {
     get() {
         return [
             {
-                label: 'Create branch here (TODO)',
-                click: () => this.dispatch(openModalCheckoutLocalBranchAction())
+                label: 'Create branch here',
+                click: () => this.dispatch(openModalCheckoutLocalBranchAction(this.commit))
             },
             {
                 label: 'Cherry pick commit (TODO)',
