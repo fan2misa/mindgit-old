@@ -1,6 +1,7 @@
 import {resetAction} from "../actions/git/reset";
 import {GIT_RESET_HARD, GIT_RESET_MIXED, GIT_RESET_SOFT} from "../constantes/services/GitConstante";
 import {revertAction} from "../actions/git/revert";
+import {openModalCheckoutLocalBranchAction} from "../actions/git/checkout";
 
 export default class LogContextualMenuTemplate {
 
@@ -14,7 +15,7 @@ export default class LogContextualMenuTemplate {
         return [
             {
                 label: 'Create branch here (TODO)',
-                click: () => console.log("Create branch here Action")
+                click: () => this.dispatch(openModalCheckoutLocalBranchAction())
             },
             {
                 label: 'Cherry pick commit (TODO)',
