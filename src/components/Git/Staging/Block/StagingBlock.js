@@ -34,7 +34,7 @@ class StagingBlock extends React.Component {
             return <ul id={"local" + current.name} className="list-unstyled">
                 {current.children.map(branch => {
                     return <li key={branch.name}>
-                        <div className="media">
+                        <div className="media staging-block-file">
                             <div style={{width: 20}}>
                                 <FontAwesomeIcon className="align-self-center" icon={this.getIcon(branch)} />
                             </div>
@@ -42,10 +42,10 @@ class StagingBlock extends React.Component {
                                 <div data-toggle="collapse" data-target={"#stage-" + parent + '-' + StringUtil.toSnakeCase(branch.name)}>
                                     {branch.name}
                                 </div>
-                                <div id={"stage-" + parent + '-' + StringUtil.toSnakeCase(branch.name)} className="collapse">
-                                    {this.getSub(parent + StringUtil.toSnakeCase(branch.name), branch)}
-                                </div>
                             </div>
+                        </div>
+                        <div id={"stage-" + parent + '-' + StringUtil.toSnakeCase(branch.name)} className="collapse">
+                            {this.getSub(parent + StringUtil.toSnakeCase(branch.name), branch)}
                         </div>
                     </li>
                 })}
@@ -57,8 +57,7 @@ class StagingBlock extends React.Component {
         return (
             <div className="staging-block">
                 <div className="staging-block-header">
-                    <button className={this.getButtonClasseName()}
-                            onClick={() => this.props.buttonOnClick()}>
+                    <button className={this.getButtonClasseName()} onClick={() => this.props.buttonOnClick()}>
                         {this.props.buttonText}
                     </button>
                 </div>
@@ -66,7 +65,7 @@ class StagingBlock extends React.Component {
                     <ul className="list-unstyled">
                         {this.props.files.map(branch => {
                             return <li key={branch.name}>
-                                <div className="media">
+                                <div className="media staging-block-file">
                                     <div style={{width: 20}}>
                                         <FontAwesomeIcon icon={this.getIcon(branch)} />
                                     </div>
@@ -74,10 +73,10 @@ class StagingBlock extends React.Component {
                                         <div data-toggle="collapse" data-target={"#stage-" + StringUtil.toSnakeCase(branch.name)}>
                                             {branch.name}
                                         </div>
-                                        <div id={"stage-" + StringUtil.toSnakeCase(branch.name)} className="collapse">
-                                            {this.getSub(StringUtil.toSnakeCase(branch.name), branch)}
-                                        </div>
                                     </div>
+                                </div>
+                                <div id={"stage-" + StringUtil.toSnakeCase(branch.name)} className="collapse">
+                                    {this.getSub(StringUtil.toSnakeCase(branch.name), branch)}
                                 </div>
                             </li>
                         })}
