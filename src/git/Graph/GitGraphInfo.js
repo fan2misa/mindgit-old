@@ -25,11 +25,16 @@ class GitGraphInfo {
             let branchParent = this.getBranch(parent);
 
             if (undefined === branchParent || commit.abbr_parent.length === 2) {
-
                 let addParent = false;
+                let addToFinish = true;
+
                 if (undefined === branchParent) {
                     branchParent = this.createBranch(parent);
                     addParent = true;
+                } else {
+                    this.branches[this.getIndex(parent)].start = [...this.branches[this.getIndex(parent)].start, branchCurrent];
+                    currentLevel = false;
+                    addToFinish = false;
                 }
 
                 if (currentLevel) {
@@ -40,7 +45,10 @@ class GitGraphInfo {
                 if (addParent) {
                     this.branches = [...this.branches, branchParent];
                 }
-                branchCurrent.finish = [...branchCurrent.finish, branchParent];
+
+                if (addToFinish) {
+                    branchCurrent.finish = [...branchCurrent.finish, branchParent];
+                }
             } else {
                 this.branches[this.getIndex(parent)].start = [...this.branches[this.getIndex(parent)].start, branchCurrent];
             }
