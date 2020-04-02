@@ -9,9 +9,12 @@ class GitGraphDrawer {
 
         this.circleX = ((2 * this.commitData.level) - 1) * radius + this.commitData.level * marge;
         this.circleY = canvas.height / 2;
+        this.stashDashRect = [3];
+        this.stashDashLine = [3];
     }
 
     drawCommit() {
+        console.log(this.commitData);
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.lineWidth = 2;
 
@@ -23,12 +26,21 @@ class GitGraphDrawer {
 
         this.drawOtherBranchesLine();
 
-        this.drawCommitCircle();
+        this.commitData.stash ? this.drawCommitRect() : this.drawCommitCircle();
     }
 
     drawCommitCircle() {
         this.ctx.beginPath();
+        this.ctx.setLineDash([]);
         this.ctx.arc(this.circleX, this.circleY, radius, 0, 2 * Math.PI);
+        this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
+        this.ctx.stroke();
+    }
+
+    drawCommitRect() {
+        this.ctx.beginPath();
+        this.ctx.setLineDash(this.stashDashRect);
+        this.ctx.rect(this.circleX - radius, this.circleY - radius, 2 * radius, 2 * radius);
         this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
         this.ctx.stroke();
     }
@@ -46,6 +58,9 @@ class GitGraphDrawer {
     drawDirectChildLine() {
         if (this.commitData.hasDirectChild) {
             this.ctx.beginPath();
+
+            this.commitData.stash ? this.ctx.setLineDash(this.stashDashLine) : this.ctx.setLineDash([]);
+
             this.ctx.moveTo(this.circleX, this.circleY + radius);
             this.ctx.lineTo(this.circleX, this.canvas.height);
             this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
@@ -94,6 +109,9 @@ class GitGraphDrawer {
     drawOtherBranchesLine() {
         this.commitData.branches.forEach(d => {
             this.ctx.beginPath();
+
+            d.hasStash ? this.ctx.setLineDash(this.stashDashLine) : this.ctx.setLineDash([]);
+
             this.ctx.moveTo(((2 * d.level) - 1) * radius + d.level * marge, 0);
             this.ctx.lineTo(((2 * d.level) - 1) * radius + d.level * marge, this.canvas.height);
 

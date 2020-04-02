@@ -9,22 +9,28 @@ class Log extends React.Component {
         super(props);
         this.state = {
             data: null,
-            canvasWidth: 80
+            canvasWidth: 80,
+            show: false
         };
     }
 
     componentDidMount() {
         let data = this.props.gitGraphInfo.init(this.props.commit);
 
-        this.setState({
-            data: data,
-            canvasWidth: this.computeWidth(data.maxLevel)
-        });
+        if (null !== data) {
+            this.setState({
+                data: data,
+                canvasWidth: this.computeWidth(data.maxLevel),
+                show: true
+            });
+        }
     }
 
     componentDidUpdate() {
-        let gitGraphDrawer = new GitGraphDrawer(this.state.data, this.refs["canvas"]);
-        gitGraphDrawer.drawCommit();
+        if (this.state.show) {
+            let gitGraphDrawer = new GitGraphDrawer(this.state.data, this.refs["canvas"]);
+            gitGraphDrawer.drawCommit();
+        }
     }
 
     computeWidth(level) {
@@ -37,18 +43,22 @@ class Log extends React.Component {
     }
 
     render() {
-        return (
-            <tr className="commit-log" style={{height: this.computeHeight()}}>
-                <td className="commit-log-refs">
-                    <BranchColumn refs={this.props.commit.refs}/>
-                </td>
-                <td className="commit-log-graph" style={{width: this.state.canvasWidth, minWidth: this.state.canvasWidth}}>
-                    <canvas ref="canvas" width={this.state.canvasWidth} height={this.computeHeight()}/>
-                </td>
-                <td className="commit-log-message"><span>{this.props.commit.message}</span></td>
-                <td className="commit-log-author">{this.props.commit.author_name}</td>
-            </tr>
-        );
+        if (this.state.show) {
+            return (
+                <tr className="commit-log" style={{height: this.computeHeight()}}>
+                    <td className="commit-log-refs">
+                        <BranchColumn refs={this.props.commit.refs}/>
+                    </td>
+                    <td className="commit-log-graph" style={{width: this.state.canvasWidth, minWidth: this.state.canvasWidth}}>
+                        <canvas ref="canvas" width={this.state.canvasWidth} height={this.computeHeight()}/>
+                    </td>
+                    <td className="commit-log-message"><span>{this.props.commit.abbr_hash} ({this.props.commit.abbr_parent.join(' ')})</span></td>
+                    <td className="commit-log-author">{this.props.commit.author_name}</td>
+                </tr>
+            );
+        }
+
+        return '';
     }
 }
 
