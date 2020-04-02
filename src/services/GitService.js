@@ -71,6 +71,49 @@ class GitService {
         });
     }
 
+    reset(directory, mode, options) {
+        return new Promise(function(resolve, reject) {
+            git(directory).reset([`--${mode}`, ...options], (err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            });
+        });
+    }
+
+    revert(directory, commit) {
+        return new Promise(function(resolve, reject) {
+            git(directory).revert(commit.hash, (err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            });
+        });
+    }
+
+    checkout(directory, branch, commit) {
+        let options = ['-b', branch.name];
+
+        if (!!commit) {
+            options.push(commit.hash);
+        }
+
+        return new Promise(function(resolve, reject) {
+            git(directory).checkout(options, (err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            });
+        });
+    }
+
+    cherryPick(directory, commit) {
+        return new Promise(function(resolve, reject) {
+            let cmd = `git cherry-pick ${commit.hash}`;
+            exec(`cd ${directory} && ${cmd}`, (err, stdout) => {
+                if (err) reject(err);
+                resolve(stdout);
+            });
+        });
+    }
+
     getRemotes(directory) {
         const me = this;
         return new Promise(function(resolve, reject) {

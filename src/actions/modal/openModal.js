@@ -7,15 +7,6 @@ import ModalFooter from "../../components/Modal/ModalFooter";
 
 export const closeMainModalAction = () => {
     return (dispatch) => {
-        dispatch({
-            type: SET_INFO_MODAL,
-            data: {
-                type: null,
-                title: '',
-                body: ''
-            }
-        });
-
         $('#main-modal').modal('hide');
     }
 };

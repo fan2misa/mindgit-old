@@ -3,14 +3,14 @@ import LocalStorageService from '../../services/LocalStorageService';
 import GitService from '../../services/GitService';
 
 import {LOCALSTORAGE_DIRECTORY} from '../../constantes/services/LocalStorageConstante';
+import {startLoadAction, stopLoadAction} from "../app";
+import {refreshAction} from "./refresh";
 
-export const fetchAction = () => {
+export const resetAction = (mode, options) => {
     return (dispatch) => {
         if (GitService.isRepository(LocalStorageService.get(LOCALSTORAGE_DIRECTORY))) {
-            GitService.fetch(LocalStorageService.get(LOCALSTORAGE_DIRECTORY))
-                .then(fetchSummary => {
-                    console.log(fetchSummary);
-                });
+            GitService.reset(LocalStorageService.get(LOCALSTORAGE_DIRECTORY), mode, options)
+                .then(() => dispatch(refreshAction()));
         }
     }
 };

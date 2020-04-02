@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { remote } from 'electron';
+
 import BranchColumn from "./BranchColumn";
 import {radius, marge} from '../../../git-graph';
 import GitGraphDrawer from "../../../git/Graph/GitGraphDrawer";
@@ -42,17 +44,23 @@ class Log extends React.Component {
         return height > 30 ? height : 30;
     }
 
+    handleContextMenu() {
+        this.props.menu.popup({
+            window: remote.getCurrentWindow()
+        });
+    }
+
     render() {
         if (this.state.show) {
             return (
-                <tr className="commit-log" style={{height: this.computeHeight()}}>
+                <tr className="commit-log" style={{height: this.computeHeight()}} onContextMenu={this.handleContextMenu.bind(this)}>
                     <td className="commit-log-refs">
                         <BranchColumn refs={this.props.commit.refs}/>
                     </td>
                     <td className="commit-log-graph" style={{width: this.state.canvasWidth, minWidth: this.state.canvasWidth}}>
                         <canvas ref="canvas" width={this.state.canvasWidth} height={this.computeHeight()}/>
                     </td>
-                    <td className="commit-log-message"><span>{this.props.commit.abbr_hash} ({this.props.commit.abbr_parent.join(' ')})</span></td>
+                    <td className="commit-log-message"><span>{this.props.commit.message}</span></td>
                     <td className="commit-log-author">{this.props.commit.author_name}</td>
                 </tr>
             );
@@ -65,6 +73,7 @@ class Log extends React.Component {
 Log.propTypes = {
     commit: PropTypes.object.isRequired,
     gitGraphInfo: PropTypes.object.isRequired,
+    menu: PropTypes.object.isRequired
 };
 
 Log.defaultProps = {
