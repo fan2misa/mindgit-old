@@ -3,60 +3,77 @@ class GitGraphInfo {
 
     constructor() {
         this.branches = [];
+        this.ignore = [];
     }
 
     init(commit) {
-        let branchCurrent = this.getBranch(commit.abbr_hash);
+        if (!this.ignore.includes(commit.abbr_hash)) {
+            let branchCurrent = this.getBranch(commit.abbr_hash);
 
-        if (undefined === branchCurrent) {
-            branchCurrent = this.createBranch(commit.abbr_hash);
-        } else {
-            this.removeBranchParent(commit.abbr_hash);
-            branchCurrent.hasDirectParent = true;
+            if (undefined === branchCurrent) {
+                branchCurrent = this.createBranch(commit.abbr_hash);
+            } else {
+                this.removeBranchParent(commit.abbr_hash);
+                branchCurrent.hasDirectParent = true;
+            }
+
+            branchCurrent.hasDirectChild = !!commit.abbr_parent.length;
+
+            let currentLevel = true;
+
+            if (commit.refs.includes('refs/stash')) {
+                branchCurrent.stash = true;
+                this.ignore.push(commit.abbr_parent[1]);
+            }
+
+            branchCurrent.branches = this.addOtherBranches(branchCurrent);
+
+            commit.abbr_parent.forEach(parent => {
+                if (!this.ignore.includes(parent)) {
+                    let branchParent = this.getBranch(parent);
+
+                    if (undefined === branchParent || commit.abbr_parent.length === 2) {
+                        let addParent = false;
+                        let addToFinish = true;
+
+                        if (undefined === branchParent) {
+                            branchParent = this.createBranch(parent);
+                            addParent = true;
+                        } else {
+                            this.branches[this.getIndex(parent)].start = [...this.branches[this.getIndex(parent)].start, branchCurrent];
+                            currentLevel = false;
+                            addToFinish = false;
+                        }
+
+                        if (currentLevel) {
+                            branchParent.level = branchCurrent.level;
+                            currentLevel = false;
+                        }
+
+                        if (addParent) {
+                            if (commit.refs.includes('refs/stash')) {
+                                branchParent.hasStash = true;
+                                this.ignore.push(commit.abbr_parent[1]);
+                            }
+
+                            this.branches = [...this.branches, branchParent];
+                        }
+
+                        if (addToFinish) {
+                            branchCurrent.finish = [...branchCurrent.finish, branchParent];
+                        }
+                    } else {
+                        this.branches[this.getIndex(parent)].start = [...this.branches[this.getIndex(parent)].start, branchCurrent];
+                    }
+                }
+            });
+
+            branchCurrent.maxLevel = this.getMaxLevel(branchCurrent);
+
+            return branchCurrent;
         }
 
-        branchCurrent.hasDirectChild = !!commit.abbr_parent.length;
-
-        let currentLevel = true;
-
-        branchCurrent.branches = this.addOtherBranches(branchCurrent);
-
-        commit.abbr_parent.forEach(parent => {
-            let branchParent = this.getBranch(parent);
-
-            if (undefined === branchParent || commit.abbr_parent.length === 2) {
-                let addParent = false;
-                let addToFinish = true;
-
-                if (undefined === branchParent) {
-                    branchParent = this.createBranch(parent);
-                    addParent = true;
-                } else {
-                    this.branches[this.getIndex(parent)].start = [...this.branches[this.getIndex(parent)].start, branchCurrent];
-                    currentLevel = false;
-                    addToFinish = false;
-                }
-
-                if (currentLevel) {
-                    branchParent.level = branchCurrent.level;
-                    currentLevel = false;
-                }
-
-                if (addParent) {
-                    this.branches = [...this.branches, branchParent];
-                }
-
-                if (addToFinish) {
-                    branchCurrent.finish = [...branchCurrent.finish, branchParent];
-                }
-            } else {
-                this.branches[this.getIndex(parent)].start = [...this.branches[this.getIndex(parent)].start, branchCurrent];
-            }
-        });
-
-        branchCurrent.maxLevel = this.getMaxLevel(branchCurrent);
-
-        return branchCurrent;
+        return null;
     }
 
     createBranch(hash) {
@@ -68,7 +85,9 @@ class GitGraphInfo {
             branches: [],
             finish: [],
             start: [],
-            maxLevel: 1
+            maxLevel: 1,
+            stash: false,
+            hasStash: false,
         };
     }
 
