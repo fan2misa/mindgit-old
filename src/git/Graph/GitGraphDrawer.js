@@ -1,4 +1,4 @@
-import {marge, radius, arcRadius} from "../../git-graph";
+import {marge, radius, arcRadius, branchLevelColors, getColorByLevel} from "../../git-graph";
 
 class GitGraphDrawer {
 
@@ -32,7 +32,7 @@ class GitGraphDrawer {
         this.ctx.beginPath();
         this.ctx.setLineDash([]);
         this.ctx.arc(this.circleX, this.circleY, radius, 0, 2 * Math.PI);
-        this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
+        this.ctx.strokeStyle = getColorByLevel(this.commitData.level);
         this.ctx.stroke();
     }
 
@@ -40,7 +40,7 @@ class GitGraphDrawer {
         this.ctx.beginPath();
         this.ctx.setLineDash(this.stashDashRect);
         this.ctx.rect(this.circleX - radius, this.circleY - radius, 2 * radius, 2 * radius);
-        this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
+        this.ctx.strokeStyle = getColorByLevel(this.commitData.level);
         this.ctx.stroke();
     }
 
@@ -49,7 +49,7 @@ class GitGraphDrawer {
             this.ctx.beginPath();
             this.ctx.moveTo(this.circleX, this.circleY - radius);
             this.ctx.lineTo(this.circleX, 0);
-            this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
+            this.ctx.strokeStyle = getColorByLevel(this.commitData.level);
             this.ctx.stroke();
         }
     }
@@ -62,7 +62,7 @@ class GitGraphDrawer {
 
             this.ctx.moveTo(this.circleX, this.circleY + radius);
             this.ctx.lineTo(this.circleX, this.canvas.height);
-            this.ctx.strokeStyle = this.getColorByLevel(this.commitData.level);
+            this.ctx.strokeStyle = getColorByLevel(this.commitData.level);
             this.ctx.stroke();
         }
     }
@@ -77,7 +77,7 @@ class GitGraphDrawer {
 
                 this.ctx.lineTo(((2 * d.level) - 1) * radius + d.level * marge, 0);
 
-                this.ctx.strokeStyle = this.getColorByLevel(d.level);
+                this.ctx.strokeStyle = getColorByLevel(d.level);
 
                 this.ctx.stroke();
 
@@ -96,7 +96,7 @@ class GitGraphDrawer {
 
                 this.ctx.lineTo(((2 * d.level) - 1) * radius + d.level * marge, this.canvas.height);
 
-                this.ctx.strokeStyle = this.getColorByLevel(d.level);
+                this.ctx.strokeStyle = getColorByLevel(d.level);
 
                 this.ctx.stroke();
 
@@ -114,7 +114,7 @@ class GitGraphDrawer {
             this.ctx.moveTo(((2 * d.level) - 1) * radius + d.level * marge, 0);
             this.ctx.lineTo(((2 * d.level) - 1) * radius + d.level * marge, this.canvas.height);
 
-            this.ctx.strokeStyle = this.getColorByLevel(d.level);
+            this.ctx.strokeStyle = getColorByLevel(d.level);
 
             this.ctx.stroke();
         });
@@ -131,7 +131,7 @@ class GitGraphDrawer {
             this.ctx.lineTo((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY);
         }
 
-        this.ctx.strokeStyle = this.getColorByLevel(data.level);
+        this.ctx.strokeStyle = getColorByLevel(data.level);
 
         this.ctx.stroke();
     }
@@ -144,7 +144,7 @@ class GitGraphDrawer {
             this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY - arcRadius, arcRadius, 0, 0.5 * Math.PI, false);
         }
 
-        this.ctx.strokeStyle = this.getColorByLevel(data.level);
+        this.ctx.strokeStyle = getColorByLevel(data.level);
 
         this.ctx.stroke();
     }
@@ -157,24 +157,9 @@ class GitGraphDrawer {
             this.ctx.arc((((2 * data.level) - 1) * radius + data.level * marge) - arcRadius, this.circleY + arcRadius, arcRadius, 1.5 * Math.PI, 2 * Math.PI, false);
         }
 
-        this.ctx.strokeStyle = this.getColorByLevel(data.level);
+        this.ctx.strokeStyle = getColorByLevel(data.level);
 
         this.ctx.stroke();
-    }
-
-    getColorByLevel(level) {
-        let colors = [
-            '#16a085',
-            '#27ae60',
-            '#2980b9',
-            '#8e44ad',
-            '#f9ca24',
-            '#d35400',
-            '#c0392b',
-            '#7f8c8d',
-        ];
-
-        return colors[((level - 1) % colors.length)];
     }
 }
 

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { remote } from 'electron';
 
 import BranchColumn from "./BranchColumn";
-import {radius, marge} from '../../../git-graph';
+import {radius, marge, getColorByLevel} from '../../../git-graph';
 import GitGraphDrawer from "../../../git/Graph/GitGraphDrawer";
 
 class Log extends React.Component {
@@ -50,6 +50,13 @@ class Log extends React.Component {
         });
     }
 
+    getBackgroundGraphStyle() {
+        return {
+            backgroundColor: getColorByLevel(this.state.data.level) + '17',
+            borderRightColor: getColorByLevel(this.state.data.level)
+        };
+    }
+
     render() {
         if (this.state.show) {
             return (
@@ -58,6 +65,7 @@ class Log extends React.Component {
                         <BranchColumn refs={this.props.commit.refs}/>
                     </td>
                     <td className="commit-log-graph" style={{width: this.state.canvasWidth, minWidth: this.state.canvasWidth}}>
+                        <span className="commit-log-graph-bg" style={this.getBackgroundGraphStyle()}></span>
                         <canvas ref="canvas" width={this.state.canvasWidth} height={this.computeHeight()}/>
                     </td>
                     <td className="commit-log-message"><span>{this.props.commit.message}</span></td>

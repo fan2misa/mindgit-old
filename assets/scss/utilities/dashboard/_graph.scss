@@ -24,6 +24,7 @@
             }
 
             .commit-log-refs {
+                padding-right: .25rem;
 
                 .btn {
                     padding: 0.125rem;
@@ -45,6 +46,16 @@
                 width: auto;
                 position: relative;
 
+                .commit-log-graph-bg {
+                    position: absolute;
+                    top: 1px;
+                    bottom: 1px;
+                    left: 0;
+                    right: 0;
+                    border-right-style: solid;
+                    border-right-width: 2px;
+                }
+
                 canvas {
                     position: absolute;
                     top: 0;
@@ -54,20 +65,22 @@
             .commit-log-message {
                 position: relative;
                 width: 100%;
-            }
 
-            .commit-log-message:before {
-                content: '&nbsp;';
-                visibility: hidden;
-            }
 
-            .commit-log-message span {
-                position: absolute;
-                left: 0;
-                right: 0;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                &:before {
+                    content: '&nbsp;';
+                    visibility: hidden;
+                }
+
+                span {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    padding: .25rem;
+                }
             }
 
             &:hover {
