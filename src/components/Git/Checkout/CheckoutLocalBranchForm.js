@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import GitStatusUtil from "../../../utils/GitStatusUtil";
 
 class CheckoutLocalBranchForm extends React.Component {
     constructor(props) {
@@ -8,6 +7,10 @@ class CheckoutLocalBranchForm extends React.Component {
         this.state = {
             name: ''
         }
+    }
+
+    componentDidMount() {
+        this.refs['branchName'].focus();
     }
 
     handleChange(event) {
@@ -31,7 +34,12 @@ class CheckoutLocalBranchForm extends React.Component {
         return (
             <div className="form-inline d-flex">
                 <div className="form-group flex-grow-1">
-                    <input type="text" className="form-control d-block w-100 mr-3" placeholder="Summary" data-key="summary" value={this.state.name} onChange={this.handleChange.bind(this)} />
+                    <input type="text"
+                           className="form-control d-block w-100 mr-3"
+                           placeholder="Branch name"
+                           ref="branchName"
+                           value={this.state.name}
+                           onChange={this.handleChange.bind(this)} />
                 </div>
                 <button className="btn btn-success" disabled={!this.buttonIsEnable()} onClick={this.handleSubmit.bind(this)}>
                     Create

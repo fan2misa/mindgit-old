@@ -1,13 +1,23 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import gravatar from 'gravatar';
 
-import {fetchAction} from "../actions/git/fetch";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faFolderOpen, faSync, faDownload, faUpload, faSpinner} from '@fortawesome/free-solid-svg-icons';
+import {
+    faFolderOpen,
+    faSync,
+    faDownload,
+    faUpload,
+    faBox,
+    faBoxOpen,
+    faSpinner,
+    faCodeBranch
+} from '@fortawesome/free-solid-svg-icons';
+
+import {fetchAction} from "../actions/git/fetch";
 import {pullAction} from "../actions/git/pull";
 import {pushAction} from "../actions/git/push";
+import {openModalCheckoutLocalBranchAction} from "../actions/git/checkout";
 
 class Navbar extends React.Component {
     render() {
@@ -38,6 +48,21 @@ class Navbar extends React.Component {
                             {this.props.loadPush
                                 ? <FontAwesomeIcon icon={faSpinner} pulse data-toggle="tooltip" data-placement="bottom" title="Push" />
                                 : <FontAwesomeIcon icon={faUpload} data-toggle="tooltip" data-placement="bottom" title="Push" />}
+                        </button>
+                    </li>
+                    <li className="nav-item">
+                        <button className="btn nav-link" onClick={() => this.props.checkout()}>
+                            <FontAwesomeIcon icon={faCodeBranch} data-toggle="tooltip" data-placement="bottom" title="Branch" />
+                        </button>
+                    </li>
+                    <li className="nav-item">
+                        <button className="btn nav-link">
+                            <FontAwesomeIcon icon={faBox} data-toggle="tooltip" data-placement="bottom" title="Stash" />
+                        </button>
+                    </li>
+                    <li className="nav-item">
+                        <button className="btn nav-link">
+                            <FontAwesomeIcon icon={faBoxOpen} data-toggle="tooltip" data-placement="bottom" title="Pop" />
                         </button>
                     </li>
                 </ul>
@@ -73,6 +98,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         fetch: () => dispatch(fetchAction()),
         pull: (current) => dispatch(pullAction(current)),
         push: (current) => dispatch(pushAction(current)),
+        checkout: () => dispatch(openModalCheckoutLocalBranchAction()),
     }
 };
 

@@ -35,6 +35,7 @@ $modal-content-bg: $color-primary;
 $modal-content-border-color: darken($modal-content-bg, 5%);
 $modal-header-border-color: $modal-content-border-color;
 $modal-footer-border-color: $modal-content-border-color;
+$modal-input-bg: lighten($color-primary, 5%);
 
 // Dropdown
 $dropdown-bg: $color-primary;
