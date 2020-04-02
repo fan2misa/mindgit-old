@@ -2,6 +2,7 @@ import {resetAction} from "../actions/git/reset";
 import {GIT_RESET_HARD, GIT_RESET_MIXED, GIT_RESET_SOFT} from "../constantes/services/GitConstante";
 import {revertAction} from "../actions/git/revert";
 import {openModalCheckoutLocalBranchAction} from "../actions/git/checkout";
+import {cherryPickAction} from "../actions/git/cherry-pick";
 
 export default class LogContextualMenuTemplate {
 
@@ -18,8 +19,8 @@ export default class LogContextualMenuTemplate {
                 click: () => this.dispatch(openModalCheckoutLocalBranchAction(this.commit))
             },
             {
-                label: 'Cherry pick commit (TODO)',
-                click: () => console.log("Cherry pick commit Action")
+                label: 'Cherry pick commit',
+                click: () => this.dispatch(cherryPickAction(this.commit))
             },
             {
                 label: `Reset ${this.currentBranch.name} to this commit`,

@@ -104,6 +104,16 @@ class GitService {
         });
     }
 
+    cherryPick(directory, commit) {
+        return new Promise(function(resolve, reject) {
+            let cmd = `git cherry-pick ${commit.hash}`;
+            exec(`cd ${directory} && ${cmd}`, (err, stdout) => {
+                if (err) reject(err);
+                resolve(stdout);
+            });
+        });
+    }
+
     getRemotes(directory) {
         const me = this;
         return new Promise(function(resolve, reject) {
