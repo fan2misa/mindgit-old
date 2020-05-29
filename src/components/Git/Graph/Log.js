@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { remote } from 'electron';
+import gravatar from 'gravatar';
 
 import BranchColumn from "./BranchColumn";
 import {radius, marge, getColorByLevel} from '../../../git-graph';
@@ -31,7 +32,7 @@ class Log extends React.Component {
     componentDidUpdate() {
         if (this.state.show) {
             let gitGraphDrawer = new GitGraphDrawer(this.state.data, this.refs["canvas"]);
-            gitGraphDrawer.drawCommit();
+            gitGraphDrawer.drawCommit(gravatar.url(this.props.commit.author_email, {size: '20', rating: 'pg', d: 'retro'}, true));
         }
     }
 
@@ -81,7 +82,8 @@ class Log extends React.Component {
 Log.propTypes = {
     commit: PropTypes.object.isRequired,
     gitGraphInfo: PropTypes.object.isRequired,
-    menu: PropTypes.object.isRequired
+    menu: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 Log.defaultProps = {

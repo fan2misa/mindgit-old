@@ -1,4 +1,4 @@
-import {marge, radius, arcRadius, branchLevelColors, getColorByLevel} from "../../git-graph";
+import {marge, radius, arcRadius, getColorByLevel} from "../../git-graph";
 
 class GitGraphDrawer {
 
@@ -13,27 +13,47 @@ class GitGraphDrawer {
         this.stashDashLine = [3];
     }
 
-    drawCommit() {
+    drawCommit(imageUrl) {
+        let image = new Image();
+        image.src = imageUrl;
+
+        const me = this;
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.lineWidth = 2;
+        image.onload = function() {
+            me.ctx.lineWidth = 2;
 
-        this.drawDirectChildLine();
-        this.drawDirectParentLine();
+            me.drawDirectChildLine();
+            me.drawDirectParentLine();
 
-        this.drawStartBranchesLine();
-        this.drawFinishBranchesLine();
+            me.drawStartBranchesLine();
+            me.drawFinishBranchesLine();
 
-        this.drawOtherBranchesLine();
+            me.drawOtherBranchesLine();
 
-        this.commitData.stash ? this.drawCommitRect() : this.drawCommitCircle();
+            me.commitData.stash ? me.drawCommitRect() : me.drawCommitCircle(image);
+        }
     }
 
-    drawCommitCircle() {
+    drawCommitCircle(image) {
         this.ctx.beginPath();
         this.ctx.setLineDash([]);
+
+        this.ctx.arc(this.circleX, this.circleY, radius, 0, 2 * Math.PI);
+        this.ctx.clip();
+        this.ctx.restore();
+        this.ctx.save();
+        this.ctx.beginPath();
+        this.ctx.lineWidth = 0;
+
+        this.ctx.drawImage(image, this.circleX - radius, this.circleY - radius);
+
+        this.ctx.lineWidth = 3;
         this.ctx.arc(this.circleX, this.circleY, radius, 0, 2 * Math.PI);
         this.ctx.strokeStyle = getColorByLevel(this.commitData.level);
         this.ctx.stroke();
+
+        this.ctx.lineWidth = 2;
     }
 
     drawCommitRect() {

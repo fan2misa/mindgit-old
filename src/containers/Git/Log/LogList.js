@@ -25,6 +25,7 @@ class LogList extends React.Component {
             <tbody>
             {this.props.commits.map((commit, key) =>
                 <Log key={key}
+                     user={this.props.user}
                      commit={commit}
                      menu={this.getMenu(commit)}
                      gitGraphInfo={this.props.gitGraphInfo} />)}
@@ -43,6 +44,7 @@ class LogList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        user: state.user,
         currentBranch: state.git.current,
         commits: state.git.commits,
         loadLogs: state.load.logs,
